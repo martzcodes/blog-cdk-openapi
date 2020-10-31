@@ -1,0 +1,244 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "BlogCdkOpenApi",
+    "version" : "2020-10-31T17:25:04Z"
+  },
+  "servers" : [ {
+    "url" : "https://ze9vuq1ksi.execute-api.us-east-1.amazonaws.com/{basePath}",
+    "variables" : {
+      "basePath" : {
+        "default" : "/prod"
+      }
+    }
+  } ],
+  "paths" : {
+    "/unvalidated/{hello}/advanced" : {
+      "post" : {
+        "parameters" : [ {
+          "name" : "hello",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Credentials" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Content-Type" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/unvalidated/{hello}/basic" : {
+      "post" : {
+        "parameters" : [ {
+          "name" : "hello",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Credentials" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Content-Type" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/validated/{hello}/basic" : {
+      "post" : {
+        "parameters" : [ {
+          "name" : "hello",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BasicModel"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Credentials" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Content-Type" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/validated/{hello}/advanced" : {
+      "post" : {
+        "parameters" : [ {
+          "name" : "hello",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AdvancedModel"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "200 response",
+            "headers" : {
+              "Access-Control-Allow-Origin" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Access-Control-Allow-Credentials" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              },
+              "Content-Type" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ResponseModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "BasicModel" : {
+        "title" : "basicModel",
+        "required" : [ "someNumber", "someString" ],
+        "type" : "object",
+        "properties" : {
+          "someNumber" : {
+            "pattern" : "[0-9]+",
+            "type" : "number"
+          },
+          "someString" : {
+            "type" : "string"
+          }
+        }
+      },
+      "ResponseModel" : {
+        "title" : "responseModel",
+        "type" : "object",
+        "properties" : {
+          "message" : {
+            "type" : "string"
+          }
+        }
+      },
+      "AdvancedModel" : {
+        "title" : "advancedModel",
+        "required" : [ "basic", "greeting" ],
+        "type" : "object",
+        "properties" : {
+          "greeting" : {
+            "type" : "string"
+          },
+          "postfix" : {
+            "type" : "string"
+          },
+          "basic" : {
+            "$ref" : "#/components/schemas/BasicModel"
+          }
+        }
+      }
+    }
+  }
+}
