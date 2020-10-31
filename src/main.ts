@@ -20,13 +20,6 @@ export class MyStack extends Stack {
     });
 
     const restApi = new RestApi(this, 'BlogCdkOpenApi');
-    const unvalidatedResource = restApi.root.addResource('unvalidated');
-    const unvalidatedHelloResource = unvalidatedResource.addResource(
-      '{hello}',
-    );
-    const unvalidatedHelloBasicResource = unvalidatedHelloResource.addResource(
-      'basic',
-    );
 
     const responseModel = restApi.addModel('ResponseModel', {
       contentType: 'application/json',
@@ -58,33 +51,8 @@ export class MyStack extends Stack {
       },
     ];
 
-    unvalidatedHelloBasicResource.addMethod(
-      'POST',
-      new LambdaIntegration(basicLambda),
-      {
-        requestParameters: {
-          'method.request.path.hello': true,
-        },
-        methodResponses,
-      },
-    );
-    const unvalidatedHelloAdvancedResource = unvalidatedHelloResource.addResource(
-      'advanced',
-    );
-    unvalidatedHelloAdvancedResource.addMethod(
-      'POST',
-      new LambdaIntegration(advancedLambda),
-      {
-        requestParameters: {
-          'method.request.path.hello': true,
-        },
-        methodResponses,
-      },
-    );
-
-    const validatedResource = restApi.root.addResource('validated');
-    const validatedHelloResource = validatedResource.addResource('{hello}');
-    const validatedHelloBasicResource = validatedHelloResource.addResource(
+    const helloResource = restApi.root.addResource('{hello}');
+    const helloBasicResource = helloResource.addResource(
       'basic',
     );
     const basicModel = restApi.addModel('BasicModel', {
@@ -105,7 +73,7 @@ export class MyStack extends Stack {
       validateRequestParameters: true,
       validateRequestBody: true,
     });
-    validatedHelloBasicResource.addMethod(
+    helloBasicResource.addMethod(
       'POST',
       new LambdaIntegration(basicLambda),
       {
@@ -119,7 +87,7 @@ export class MyStack extends Stack {
         methodResponses,
       },
     );
-    const validatedHellowAdvancedResource = validatedHelloResource.addResource(
+    const hellowAdvancedResource = helloResource.addResource(
       'advanced',
     );
     const advancedModel = restApi.addModel('AdvancedModel', {
@@ -143,7 +111,7 @@ export class MyStack extends Stack {
       validateRequestParameters: true,
       validateRequestBody: true,
     });
-    validatedHellowAdvancedResource.addMethod(
+    hellowAdvancedResource.addMethod(
       'POST',
       new LambdaIntegration(advancedLambda),
       {

@@ -2,10 +2,10 @@
   "openapi" : "3.0.1",
   "info" : {
     "title" : "BlogCdkOpenApi",
-    "version" : "2020-10-31T17:25:04Z"
+    "version" : "2020-10-31T17:42:45Z"
   },
   "servers" : [ {
-    "url" : "https://ze9vuq1ksi.execute-api.us-east-1.amazonaws.com/{basePath}",
+    "url" : "https://e3td9okknk.execute-api.us-east-1.amazonaws.com/{basePath}",
     "variables" : {
       "basePath" : {
         "default" : "/prod"
@@ -13,89 +13,7 @@
     }
   } ],
   "paths" : {
-    "/unvalidated/{hello}/advanced" : {
-      "post" : {
-        "parameters" : [ {
-          "name" : "hello",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "200 response",
-            "headers" : {
-              "Access-Control-Allow-Origin" : {
-                "schema" : {
-                  "type" : "string"
-                }
-              },
-              "Access-Control-Allow-Credentials" : {
-                "schema" : {
-                  "type" : "string"
-                }
-              },
-              "Content-Type" : {
-                "schema" : {
-                  "type" : "string"
-                }
-              }
-            },
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResponseModel"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/unvalidated/{hello}/basic" : {
-      "post" : {
-        "parameters" : [ {
-          "name" : "hello",
-          "in" : "path",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "200 response",
-            "headers" : {
-              "Access-Control-Allow-Origin" : {
-                "schema" : {
-                  "type" : "string"
-                }
-              },
-              "Access-Control-Allow-Credentials" : {
-                "schema" : {
-                  "type" : "string"
-                }
-              },
-              "Content-Type" : {
-                "schema" : {
-                  "type" : "string"
-                }
-              }
-            },
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ResponseModel"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/validated/{hello}/basic" : {
+    "/{hello}/advanced" : {
       "post" : {
         "parameters" : [ {
           "name" : "hello",
@@ -109,7 +27,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/BasicModel"
+                "$ref" : "#/components/schemas/AdvancedModel"
               }
             }
           },
@@ -146,7 +64,7 @@
         }
       }
     },
-    "/validated/{hello}/advanced" : {
+    "/{hello}/basic" : {
       "post" : {
         "parameters" : [ {
           "name" : "hello",
@@ -160,7 +78,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/AdvancedModel"
+                "$ref" : "#/components/schemas/BasicModel"
               }
             }
           },
