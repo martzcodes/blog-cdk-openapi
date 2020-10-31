@@ -1,4 +1,4 @@
-import { JsonSchemaType, JsonSchemaVersion, LambdaIntegration, RestApi } from '@aws-cdk/aws-apigateway';
+import { JsonSchemaType, JsonSchemaVersion, LambdaIntegration, RestApi, TokenAuthorizer } from '@aws-cdk/aws-apigateway';
 import { Runtime } from '@aws-cdk/aws-lambda';
 import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
 import { App, Construct, Stack, StackProps } from '@aws-cdk/core';
@@ -19,7 +19,22 @@ export class MyStack extends Stack {
       runtime: Runtime.NODEJS_12_X,
     });
 
-    const restApi = new RestApi(this, 'BlogCdkOpenApi');
+    const authorizerLambda = new NodejsFunction(this, 'authorizerLambdaFunction', {
+      functionName: 'blogAuthorizer',
+      entry: `${__dirname}/lambdas/authorizer.ts`,
+      handler: 'handler',
+      runtime: Runtime.NODEJS_12_X,
+    });
+
+    const auth = new TokenAuthorizer(this, 'blogAuthorizer', {
+      handler: authorizerLambda,
+    });
+
+    const restApi = new RestApi(this, 'BlogCdkOpenApi', {
+      defaultMethodOptions: {
+        authorizer: auth,
+      },
+    });
 
     const responseModel = restApi.addModel('ResponseModel', {
       contentType: 'application/json',

@@ -2,7 +2,7 @@
   "openapi" : "3.0.1",
   "info" : {
     "title" : "BlogCdkOpenApi",
-    "version" : "2020-10-31T17:42:45Z"
+    "version" : "2020-10-31T18:00:07Z"
   },
   "servers" : [ {
     "url" : "https://e3td9okknk.execute-api.us-east-1.amazonaws.com/{basePath}",
@@ -61,7 +61,10 @@
               }
             }
           }
-        }
+        },
+        "security" : [ {
+          "blogcdkopenapiblogAuthorizer0C135D8A" : [ ]
+        } ]
       }
     },
     "/{hello}/basic" : {
@@ -112,7 +115,10 @@
               }
             }
           }
-        }
+        },
+        "security" : [ {
+          "blogcdkopenapiblogAuthorizer0C135D8A" : [ ]
+        } ]
       }
     }
   },
@@ -156,6 +162,14 @@
             "$ref" : "#/components/schemas/BasicModel"
           }
         }
+      }
+    },
+    "securitySchemes" : {
+      "blogcdkopenapiblogAuthorizer0C135D8A" : {
+        "type" : "apiKey",
+        "name" : "Authorization",
+        "in" : "header",
+        "x-amazon-apigateway-authtype" : "custom"
       }
     }
   }
