@@ -2,6 +2,7 @@ import { JsonSchemaType, JsonSchemaVersion, LambdaIntegration, RestApi, TokenAut
 import { Runtime } from '@aws-cdk/aws-lambda';
 import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
 import { App, Construct, Stack, StackProps } from '@aws-cdk/core';
+import { processApiSpec, OpenApiConstruct } from './util/openapi';
 
 export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps = {}) {
@@ -36,6 +37,12 @@ export class MyStack extends Stack {
       },
     });
 
+    const apiSpec: OpenApiConstruct = {
+      models: [],
+      methods: [],
+      authorizer: auth,
+    };
+
     const responseModel = restApi.addModel('ResponseModel', {
       contentType: 'application/json',
       modelName: 'ResponseModel',
@@ -48,6 +55,7 @@ export class MyStack extends Stack {
         },
       },
     });
+    apiSpec.models.push(responseModel);
 
     const methodResponses = [
       {
@@ -84,11 +92,12 @@ export class MyStack extends Stack {
         required: ['someString', 'someNumber'],
       },
     });
+    apiSpec.models.push(basicModel);
     const basicValidator = restApi.addRequestValidator('BasicValidator', {
       validateRequestParameters: true,
       validateRequestBody: true,
     });
-    helloBasicResource.addMethod(
+    const postHelloBasicMethod = helloBasicResource.addMethod(
       'POST',
       new LambdaIntegration(basicLambda),
       {
@@ -102,7 +111,8 @@ export class MyStack extends Stack {
         methodResponses,
       },
     );
-    const hellowAdvancedResource = helloResource.addResource(
+    apiSpec.methods.push(postHelloBasicMethod);
+    const helloAdvancedResource = helloResource.addResource(
       'advanced',
     );
     const advancedModel = restApi.addModel('AdvancedModel', {
@@ -122,11 +132,12 @@ export class MyStack extends Stack {
         required: ['greeting', 'basic'],
       },
     });
+    apiSpec.models.push(advancedModel);
     const advancedValidator = restApi.addRequestValidator('AdvancedValidator', {
       validateRequestParameters: true,
       validateRequestBody: true,
     });
-    hellowAdvancedResource.addMethod(
+    const postHelloAdvancedMethod = helloAdvancedResource.addMethod(
       'POST',
       new LambdaIntegration(advancedLambda),
       {
@@ -140,6 +151,8 @@ export class MyStack extends Stack {
         methodResponses,
       },
     );
+    apiSpec.methods.push(postHelloAdvancedMethod);
+    processApiSpec(apiSpec);
   }
 }
 
