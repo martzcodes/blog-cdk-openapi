@@ -1,26 +1,37 @@
 import {
   LambdaIntegration,
-  MethodResponse,
   Model,
   ModelOptions,
   RequestValidator,
   Resource,
   RestApi,
-  TokenAuthorizer,
+  RestApiProps,
 } from '@aws-cdk/aws-apigateway';
 import { Function } from '@aws-cdk/aws-lambda';
 import { Construct } from '@aws-cdk/core';
+import { getSchemas } from './util/ast';
+
+interface CustomMethodResponse {
+  statusCode: string;
+  responseParameters: {
+    [key: string]: boolean;
+  };
+  responseModels: {
+    [key: string]: string;
+  };
+}
 
 export interface OpenApiProps {
-  authorizer?: TokenAuthorizer;
-  models: { [key: string]: ModelOptions };
+  api: RestApiProps;
+  models: string;
   paths: {
     [key: string]: {
-      method: string;
-      lambda: Function;
-      requiredParameters: string[];
-      requestModels: { [key: string]: string };
-      methodResponses: MethodResponse[];
+      [key: string]: {
+        lambda: Function;
+        requiredParameters: string[];
+        requestModels: { [key: string]: string };
+        methodResponses: CustomMethodResponse[];
+      };
     };
   };
 }
@@ -39,87 +50,87 @@ export class OpenApiConstruct extends Construct {
 
   constructor(scope: Construct, id: string, props: OpenApiProps) {
     super(scope, id);
-    console.log(props);
-    if (props.authorizer) {
-      this.restApi = new RestApi(this, 'BlogCdkOpenApi', {
-        defaultMethodOptions: {
-          authorizer: props.authorizer,
-        },
-      });
-    } else {
-      this.restApi = new RestApi(this, 'BlogCdkOpenApi', {});
-    }
-    this.models = Object.keys(props.models).reduce((p, modelName) => {
-      return {
-        ...p,
-        [modelName]: this.restApi.addModel(modelName, props.models[modelName]),
-      };
-    }, {});
+
+    this.restApi = new RestApi(this, `${id}Api`, props.api);
+    const modelSchemas: { [key: string]: ModelOptions } = getSchemas(
+      `${__dirname}/interfaces`,
+      this.restApi.restApiId,
+    );
+
+    console.log(modelSchemas);
+
+    this.models = {};
+
+    const addModel = (modelName: string, modelSchema: ModelOptions) => {
+      this.models[modelName] = this.restApi.addModel(
+        modelSchema.modelName || '',
+        modelSchema,
+      );
+    };
+
     this.validators = {};
     this.resources = {};
     Object.keys(props.paths)
       .sort()
       .forEach((path) => {
         const splitPath = path.split('/');
-        for (let j = 1; j < splitPath.length; j++) {
-          const tempPath = path.split('/').slice(0, j).join('/');
+        for (let j = 2; j <= splitPath.length; j++) {
+          const tempPath = splitPath.slice(0, j).join('/');
           if (!(tempPath in this.resources)) {
-            if (j === 1) {
-              this.resources[tempPath] = this.restApi.root.addResource(
-                splitPath[j],
-              );
+            if (j === 2) {
+              this.resources[tempPath] = this.restApi.root.addResource(splitPath[j-1]);
             } else {
               this.resources[tempPath] = this.resources[
-                tempPath.split('/').splice(0, -1).join('/')
-              ].addResource(splitPath[j]);
+                splitPath.slice(0, j-1).join('/')
+              ].addResource(splitPath[j-1]);
             }
           }
         }
-        const pathProps = props.paths[path];
-
-        const validator: { requestValidator?: RequestValidator } = {};
-        if (
-          pathProps.requiredParameters.length > 0 &&
+        Object.keys(props.paths[path]).forEach((method) => {
+          const pathProps = props.paths[path][method];
+          const validator: { requestValidator?: RequestValidator } = {};
+          if (
+            pathProps.requiredParameters.length > 0 &&
         Object.keys(pathProps.requestModels).length > 0
-        ) {
-          if (!('paramBodyValidator' in this.validators)) {
-            this.validators.paramBodyValidator = this.restApi.addRequestValidator(
-              'paramBodyValidator',
-              {
-                validateRequestBody: true,
-                validateRequestParameters: true,
-              },
-            );
+          ) {
+            if (!('paramBodyValidator' in this.validators)) {
+              this.validators.paramBodyValidator = this.restApi.addRequestValidator(
+                'paramBodyValidator',
+                {
+                  validateRequestBody: true,
+                  validateRequestParameters: true,
+                },
+              );
+            }
+            validator.requestValidator = this.validators.paramBodyValidator;
+          } else if (pathProps.requiredParameters.length > 0) {
+            if (!('paramValidator' in this.validators)) {
+              this.validators.paramValidator = this.restApi.addRequestValidator(
+                'paramValidator',
+                {
+                  validateRequestParameters: true,
+                },
+              );
+            }
+            validator.requestValidator = this.validators.paramValidator;
+          } else if (Object.keys(pathProps.requestModels).length > 0) {
+            if (!('bodyValidator' in this.validators)) {
+              this.validators.bodyValidator = this.restApi.addRequestValidator(
+                'bodyValidator',
+                {
+                  validateRequestBody: true,
+                },
+              );
+            }
+            validator.requestValidator = this.validators.bodyValidator;
           }
-          validator.requestValidator = this.validators.paramBodyValidator;
-        } else if (pathProps.requiredParameters.length > 0) {
-          if (!('paramValidator' in this.validators)) {
-            this.validators.paramValidator = this.restApi.addRequestValidator(
-              'paramValidator',
-              {
-                validateRequestParameters: true,
-              },
-            );
-          }
-          validator.requestValidator = this.validators.paramValidator;
-        } else if (Object.keys(pathProps.requestModels).length > 0) {
-          if (!('bodyValidator' in this.validators)) {
-            this.validators.bodyValidator = this.restApi.addRequestValidator(
-              'bodyValidator',
-              {
-                validateRequestBody: true,
-              },
-            );
-          }
-          validator.requestValidator = this.validators.bodyValidator;
-        }
 
-        this.resources[path].addMethod(
-          pathProps.method,
-          new LambdaIntegration(pathProps.lambda),
-          {
+          const methodProps = {
             requestModels: Object.keys(pathProps.requestModels).reduce(
               (p, c) => {
+                if (!(pathProps.requestModels[c] in this.models)) {
+                  addModel(pathProps.requestModels[c], modelSchemas[pathProps.requestModels[c]]);
+                }
                 return { ...p, [c]: this.models[pathProps.requestModels[c]] };
               },
               {},
@@ -131,9 +142,30 @@ export class OpenApiConstruct extends Construct {
               {},
             ),
             ...validator,
-            ...pathProps.methodResponses,
-          },
-        );
+            methodResponses: pathProps.methodResponses.map((methodResponse) => {
+              return {
+                ...methodResponse,
+                responseModels: Object.keys(methodResponse.responseModels).reduce((p, c) => {
+                  if (!(methodResponse.responseModels[c] in this.models)) {
+                    addModel(methodResponse.responseModels[c], modelSchemas[methodResponse.responseModels[c]]);
+                  }
+                  return {
+                    ...p,
+                    [c]: this.models[methodResponse.responseModels[c]],
+                  };
+                }, {}),
+              };
+            }),
+          };
+
+          console.log(methodProps);
+
+          this.resources[path].addMethod(
+            method,
+            new LambdaIntegration(pathProps.lambda),
+            methodProps,
+          );
+        });
       });
   }
 }

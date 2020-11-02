@@ -1,11 +1,11 @@
 {
   "openapi" : "3.0.1",
   "info" : {
-    "title" : "BlogCdkOpenApi",
-    "version" : "2020-10-31T18:00:07Z"
+    "title" : "OpenApiApi",
+    "version" : "2020-11-02T06:03:49Z"
   },
   "servers" : [ {
-    "url" : "https://e3td9okknk.execute-api.us-east-1.amazonaws.com/{basePath}",
+    "url" : "https://w1gy9fvdsa.execute-api.us-east-1.amazonaws.com/{basePath}",
     "variables" : {
       "basePath" : {
         "default" : "/prod"
@@ -125,7 +125,7 @@
   "components" : {
     "schemas" : {
       "BasicModel" : {
-        "title" : "basicModel",
+        "title" : "BasicModel",
         "required" : [ "someNumber", "someString" ],
         "type" : "object",
         "properties" : {
@@ -139,7 +139,8 @@
         }
       },
       "ResponseModel" : {
-        "title" : "responseModel",
+        "title" : "ResponseModel",
+        "required" : [ "message" ],
         "type" : "object",
         "properties" : {
           "message" : {
@@ -148,7 +149,7 @@
         }
       },
       "AdvancedModel" : {
-        "title" : "advancedModel",
+        "title" : "AdvancedModel",
         "required" : [ "basic", "greeting" ],
         "type" : "object",
         "properties" : {
