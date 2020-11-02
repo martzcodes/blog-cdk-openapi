@@ -48,36 +48,34 @@ export class MyStack extends Stack {
       },
     ];
 
-    new OpenApiConstruct(this, 'OpenApi', {
-      api: {
+    const api = new OpenApiConstruct(this, 'OpenApi', {
+      apiProps: {
         defaultMethodOptions: {
           authorizer: auth,
         },
       },
       models: `${__dirname}/interfaces`,
-      paths: {
-        '/{hello}/basic': {
-          POST: {
-            lambda: basicLambda,
-            requiredParameters: ['hello'],
-            requestModels: {
-              'application/json': 'Basic',
-            },
-            methodResponses,
-          },
-        },
-        '/{hello}/advanced': {
-          POST: {
-            lambda: advancedLambda,
-            requiredParameters: ['hello'],
-            requestModels: {
-              'application/json': 'Advanced',
-            },
-            methodResponses,
-          },
-        },
-      },
     });
+
+    api.addEndpoint('/{hello}/basic', 'POST', {
+      lambda: basicLambda,
+      requiredParameters: ['hello'],
+      requestModels: {
+        'application/json': 'Basic',
+      },
+      methodResponses,
+    });
+
+    api.addEndpoint('/{hello}/advanced', 'POST', {
+      lambda: advancedLambda,
+      requiredParameters: ['hello'],
+      requestModels: {
+        'application/json': 'Advanced',
+      },
+      methodResponses,
+    });
+
+    console.log(JSON.stringify(api.generateOpenApiSpec(), null, 2));
   }
 }
 
