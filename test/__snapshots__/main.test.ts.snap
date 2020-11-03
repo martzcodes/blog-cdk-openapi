@@ -26,7 +26,6 @@ Object {
       "BasicModel": Object {
         "properties": Object {
           "someNumber": Object {
-            "pattern": "[0-9]+",
             "type": "number",
           },
           "someString": Object {
@@ -63,7 +62,7 @@ Object {
     },
   },
   "info": Object {
-    "title": "BlogCdkOpenApi",
+    "title": "OpenApi",
     "version": Any<String>,
   },
   "openapi": "3.0.1",
@@ -84,7 +83,7 @@ Object {
           "content": Object {
             "application/json": Object {
               "schema": Object {
-                "$ref": "",
+                "$ref": "#/components/schemas/AdvancedModel",
               },
             },
           },
@@ -142,7 +141,7 @@ Object {
           "content": Object {
             "application/json": Object {
               "schema": Object {
-                "$ref": "",
+                "$ref": "#/components/schemas/BasicModel",
               },
             },
           },
@@ -191,14 +190,14 @@ Object {
 exports[`Snapshot 1`] = `
 Object {
   "Outputs": Object {
-    "OpenApiOpenApiApiEndpoint756A510B": Object {
+    "OpenApiEndpointAD04A46A": Object {
       "Value": Object {
         "Fn::Join": Array [
           "",
           Array [
             "https://",
             Object {
-              "Ref": "OpenApiOpenApiApi2E1DE449",
+              "Ref": "OpenApi667EDE0B",
             },
             ".execute-api.",
             Object {
@@ -210,7 +209,7 @@ Object {
             },
             "/",
             Object {
-              "Ref": "OpenApiOpenApiApiDeploymentStageprod143ED280",
+              "Ref": "OpenApiDeploymentStageprod3BBCA9DE",
             },
             "/",
           ],
@@ -257,35 +256,36 @@ Object {
     },
   },
   "Resources": Object {
-    "OpenApiOpenApiApi2E1DE449": Object {
+    "OpenApi667EDE0B": Object {
       "Properties": Object {
-        "Name": "OpenApiApi",
+        "Name": "OpenApi",
       },
       "Type": "AWS::ApiGateway::RestApi",
     },
-    "OpenApiOpenApiApiAccountA1F35474": Object {
+    "OpenApiAccount550EBAC4": Object {
       "DependsOn": Array [
-        "OpenApiOpenApiApi2E1DE449",
+        "OpenApi667EDE0B",
       ],
       "Properties": Object {
         "CloudWatchRoleArn": Object {
           "Fn::GetAtt": Array [
-            "OpenApiOpenApiApiCloudWatchRole26232647",
+            "OpenApiCloudWatchRole86E92353",
             "Arn",
           ],
         },
       },
       "Type": "AWS::ApiGateway::Account",
     },
-    "OpenApiOpenApiApiAdvancedModelD703FA70": Object {
+    "OpenApiAdvancedModelF9EAD729": Object {
       "Properties": Object {
         "ContentType": "application/json",
         "Name": "AdvancedModel",
         "RestApiId": Object {
-          "Ref": "OpenApiOpenApiApi2E1DE449",
+          "Ref": "OpenApi667EDE0B",
         },
         "Schema": Object {
-          "$schema": "http://json-schema.org/draft-04/schema#",
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "additionalProperties": false,
           "properties": Object {
             "basic": Object {
               "$ref": Object {
@@ -294,7 +294,7 @@ Object {
                   Array [
                     "https://apigateway.amazonaws.com/restapis/",
                     Object {
-                      "Ref": "OpenApiOpenApiApi2E1DE449",
+                      "Ref": "OpenApi667EDE0B",
                     },
                     "/models/BasicModel",
                   ],
@@ -318,18 +318,18 @@ Object {
       },
       "Type": "AWS::ApiGateway::Model",
     },
-    "OpenApiOpenApiApiBasicModel1A7FD6A8": Object {
+    "OpenApiBasicModel9C5F67F6": Object {
       "Properties": Object {
         "ContentType": "application/json",
         "Name": "BasicModel",
         "RestApiId": Object {
-          "Ref": "OpenApiOpenApiApi2E1DE449",
+          "Ref": "OpenApi667EDE0B",
         },
         "Schema": Object {
-          "$schema": "http://json-schema.org/draft-04/schema#",
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "additionalProperties": false,
           "properties": Object {
             "someNumber": Object {
-              "pattern": "[0-9]+",
               "type": "number",
             },
             "someString": Object {
@@ -346,7 +346,7 @@ Object {
       },
       "Type": "AWS::ApiGateway::Model",
     },
-    "OpenApiOpenApiApiCloudWatchRole26232647": Object {
+    "OpenApiCloudWatchRole86E92353": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -377,47 +377,48 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "OpenApiOpenApiApiDeployment4D8213A63de7627c589dd84322c511723a574653": Object {
+    "OpenApiDeployment46B898978a783031191b66b80db5aaef44577382": Object {
       "DependsOn": Array [
-        "OpenApiOpenApiApiAdvancedModelD703FA70",
-        "OpenApiOpenApiApiBasicModel1A7FD6A8",
-        "OpenApiOpenApiApihelloadvancedPOST9541C057",
-        "OpenApiOpenApiApihelloadvanced545D9C56",
-        "OpenApiOpenApiApihellobasicPOST2DD93CCE",
-        "OpenApiOpenApiApihellobasic894AB878",
-        "OpenApiOpenApiApihello7632442C",
-        "OpenApiOpenApiApiparamBodyValidatorB7E8FC6D",
-        "OpenApiOpenApiApiResponseModel3EE343F8",
+        "OpenApiAdvancedModelF9EAD729",
+        "OpenApiBasicModel9C5F67F6",
+        "OpenApihelloadvancedPOSTAD3289AF",
+        "OpenApihelloadvanced433A9690",
+        "OpenApihellobasicPOSTF675B7C6",
+        "OpenApihellobasic064FEE77",
+        "OpenApihello8A8BE927",
+        "OpenApiparamBodyValidator2BE5DCEC",
+        "OpenApiResponseModel05515321",
       ],
       "Properties": Object {
         "Description": "Automatically created by the RestApi construct",
         "RestApiId": Object {
-          "Ref": "OpenApiOpenApiApi2E1DE449",
+          "Ref": "OpenApi667EDE0B",
         },
       },
       "Type": "AWS::ApiGateway::Deployment",
     },
-    "OpenApiOpenApiApiDeploymentStageprod143ED280": Object {
+    "OpenApiDeploymentStageprod3BBCA9DE": Object {
       "Properties": Object {
         "DeploymentId": Object {
-          "Ref": "OpenApiOpenApiApiDeployment4D8213A63de7627c589dd84322c511723a574653",
+          "Ref": "OpenApiDeployment46B898978a783031191b66b80db5aaef44577382",
         },
         "RestApiId": Object {
-          "Ref": "OpenApiOpenApiApi2E1DE449",
+          "Ref": "OpenApi667EDE0B",
         },
         "StageName": "prod",
       },
       "Type": "AWS::ApiGateway::Stage",
     },
-    "OpenApiOpenApiApiResponseModel3EE343F8": Object {
+    "OpenApiResponseModel05515321": Object {
       "Properties": Object {
         "ContentType": "application/json",
         "Name": "ResponseModel",
         "RestApiId": Object {
-          "Ref": "OpenApiOpenApiApi2E1DE449",
+          "Ref": "OpenApi667EDE0B",
         },
         "Schema": Object {
-          "$schema": "http://json-schema.org/draft-04/schema#",
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "additionalProperties": false,
           "properties": Object {
             "message": Object {
               "type": "string",
@@ -432,34 +433,34 @@ Object {
       },
       "Type": "AWS::ApiGateway::Model",
     },
-    "OpenApiOpenApiApihello7632442C": Object {
+    "OpenApihello8A8BE927": Object {
       "Properties": Object {
         "ParentId": Object {
           "Fn::GetAtt": Array [
-            "OpenApiOpenApiApi2E1DE449",
+            "OpenApi667EDE0B",
             "RootResourceId",
           ],
         },
         "PathPart": "{hello}",
         "RestApiId": Object {
-          "Ref": "OpenApiOpenApiApi2E1DE449",
+          "Ref": "OpenApi667EDE0B",
         },
       },
       "Type": "AWS::ApiGateway::Resource",
     },
-    "OpenApiOpenApiApihelloadvanced545D9C56": Object {
+    "OpenApihelloadvanced433A9690": Object {
       "Properties": Object {
         "ParentId": Object {
-          "Ref": "OpenApiOpenApiApihello7632442C",
+          "Ref": "OpenApihello8A8BE927",
         },
         "PathPart": "advanced",
         "RestApiId": Object {
-          "Ref": "OpenApiOpenApiApi2E1DE449",
+          "Ref": "OpenApi667EDE0B",
         },
       },
       "Type": "AWS::ApiGateway::Resource",
     },
-    "OpenApiOpenApiApihelloadvancedPOST9541C057": Object {
+    "OpenApihelloadvancedPOSTAD3289AF": Object {
       "Properties": Object {
         "AuthorizationType": "CUSTOM",
         "AuthorizerId": Object {
@@ -497,7 +498,7 @@ Object {
           Object {
             "ResponseModels": Object {
               "application/json": Object {
-                "Ref": "OpenApiOpenApiApiResponseModel3EE343F8",
+                "Ref": "OpenApiResponseModel05515321",
               },
             },
             "ResponseParameters": Object {
@@ -510,25 +511,25 @@ Object {
         ],
         "RequestModels": Object {
           "application/json": Object {
-            "Ref": "OpenApiOpenApiApiAdvancedModelD703FA70",
+            "Ref": "OpenApiAdvancedModelF9EAD729",
           },
         },
         "RequestParameters": Object {
           "method.request.path.hello": true,
         },
         "RequestValidatorId": Object {
-          "Ref": "OpenApiOpenApiApiparamBodyValidatorB7E8FC6D",
+          "Ref": "OpenApiparamBodyValidator2BE5DCEC",
         },
         "ResourceId": Object {
-          "Ref": "OpenApiOpenApiApihelloadvanced545D9C56",
+          "Ref": "OpenApihelloadvanced433A9690",
         },
         "RestApiId": Object {
-          "Ref": "OpenApiOpenApiApi2E1DE449",
+          "Ref": "OpenApi667EDE0B",
         },
       },
       "Type": "AWS::ApiGateway::Method",
     },
-    "OpenApiOpenApiApihelloadvancedPOSTApiPermissionTesttestOpenApiOpenApiApi003C76EEPOSThelloadvanced473E8794": Object {
+    "OpenApihelloadvancedPOSTApiPermissionTesttestOpenApi1D4E6227POSThelloadvancedD4D12389": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -556,7 +557,7 @@ Object {
               },
               ":",
               Object {
-                "Ref": "OpenApiOpenApiApi2E1DE449",
+                "Ref": "OpenApi667EDE0B",
               },
               "/test-invoke-stage/POST/*/advanced",
             ],
@@ -565,7 +566,7 @@ Object {
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "OpenApiOpenApiApihelloadvancedPOSTApiPermissiontestOpenApiOpenApiApi003C76EEPOSThelloadvancedDF46C5F1": Object {
+    "OpenApihelloadvancedPOSTApiPermissiontestOpenApi1D4E6227POSThelloadvanced22497703": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -593,11 +594,11 @@ Object {
               },
               ":",
               Object {
-                "Ref": "OpenApiOpenApiApi2E1DE449",
+                "Ref": "OpenApi667EDE0B",
               },
               "/",
               Object {
-                "Ref": "OpenApiOpenApiApiDeploymentStageprod143ED280",
+                "Ref": "OpenApiDeploymentStageprod3BBCA9DE",
               },
               "/POST/*/advanced",
             ],
@@ -606,19 +607,97 @@ Object {
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "OpenApiOpenApiApihellobasic894AB878": Object {
+    "OpenApihellobasic064FEE77": Object {
       "Properties": Object {
         "ParentId": Object {
-          "Ref": "OpenApiOpenApiApihello7632442C",
+          "Ref": "OpenApihello8A8BE927",
         },
         "PathPart": "basic",
         "RestApiId": Object {
-          "Ref": "OpenApiOpenApiApi2E1DE449",
+          "Ref": "OpenApi667EDE0B",
         },
       },
       "Type": "AWS::ApiGateway::Resource",
     },
-    "OpenApiOpenApiApihellobasicPOST2DD93CCE": Object {
+    "OpenApihellobasicPOSTApiPermissionTesttestOpenApi1D4E6227POSThellobasicC19B13AB": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "basicLambdaFunctionF69553F9",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "OpenApi667EDE0B",
+              },
+              "/test-invoke-stage/POST/*/basic",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "OpenApihellobasicPOSTApiPermissiontestOpenApi1D4E6227POSThellobasic38FB83EC": Object {
+      "Properties": Object {
+        "Action": "lambda:InvokeFunction",
+        "FunctionName": Object {
+          "Fn::GetAtt": Array [
+            "basicLambdaFunctionF69553F9",
+            "Arn",
+          ],
+        },
+        "Principal": "apigateway.amazonaws.com",
+        "SourceArn": Object {
+          "Fn::Join": Array [
+            "",
+            Array [
+              "arn:",
+              Object {
+                "Ref": "AWS::Partition",
+              },
+              ":execute-api:",
+              Object {
+                "Ref": "AWS::Region",
+              },
+              ":",
+              Object {
+                "Ref": "AWS::AccountId",
+              },
+              ":",
+              Object {
+                "Ref": "OpenApi667EDE0B",
+              },
+              "/",
+              Object {
+                "Ref": "OpenApiDeploymentStageprod3BBCA9DE",
+              },
+              "/POST/*/basic",
+            ],
+          ],
+        },
+      },
+      "Type": "AWS::Lambda::Permission",
+    },
+    "OpenApihellobasicPOSTF675B7C6": Object {
       "Properties": Object {
         "AuthorizationType": "CUSTOM",
         "AuthorizerId": Object {
@@ -656,7 +735,7 @@ Object {
           Object {
             "ResponseModels": Object {
               "application/json": Object {
-                "Ref": "OpenApiOpenApiApiResponseModel3EE343F8",
+                "Ref": "OpenApiResponseModel05515321",
               },
             },
             "ResponseParameters": Object {
@@ -669,106 +748,28 @@ Object {
         ],
         "RequestModels": Object {
           "application/json": Object {
-            "Ref": "OpenApiOpenApiApiBasicModel1A7FD6A8",
+            "Ref": "OpenApiBasicModel9C5F67F6",
           },
         },
         "RequestParameters": Object {
           "method.request.path.hello": true,
         },
         "RequestValidatorId": Object {
-          "Ref": "OpenApiOpenApiApiparamBodyValidatorB7E8FC6D",
+          "Ref": "OpenApiparamBodyValidator2BE5DCEC",
         },
         "ResourceId": Object {
-          "Ref": "OpenApiOpenApiApihellobasic894AB878",
+          "Ref": "OpenApihellobasic064FEE77",
         },
         "RestApiId": Object {
-          "Ref": "OpenApiOpenApiApi2E1DE449",
+          "Ref": "OpenApi667EDE0B",
         },
       },
       "Type": "AWS::ApiGateway::Method",
     },
-    "OpenApiOpenApiApihellobasicPOSTApiPermissionTesttestOpenApiOpenApiApi003C76EEPOSThellobasic1B1480BE": Object {
-      "Properties": Object {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": Object {
-          "Fn::GetAtt": Array [
-            "basicLambdaFunctionF69553F9",
-            "Arn",
-          ],
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "arn:",
-              Object {
-                "Ref": "AWS::Partition",
-              },
-              ":execute-api:",
-              Object {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              Object {
-                "Ref": "AWS::AccountId",
-              },
-              ":",
-              Object {
-                "Ref": "OpenApiOpenApiApi2E1DE449",
-              },
-              "/test-invoke-stage/POST/*/basic",
-            ],
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "OpenApiOpenApiApihellobasicPOSTApiPermissiontestOpenApiOpenApiApi003C76EEPOSThellobasic15B41AC8": Object {
-      "Properties": Object {
-        "Action": "lambda:InvokeFunction",
-        "FunctionName": Object {
-          "Fn::GetAtt": Array [
-            "basicLambdaFunctionF69553F9",
-            "Arn",
-          ],
-        },
-        "Principal": "apigateway.amazonaws.com",
-        "SourceArn": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "arn:",
-              Object {
-                "Ref": "AWS::Partition",
-              },
-              ":execute-api:",
-              Object {
-                "Ref": "AWS::Region",
-              },
-              ":",
-              Object {
-                "Ref": "AWS::AccountId",
-              },
-              ":",
-              Object {
-                "Ref": "OpenApiOpenApiApi2E1DE449",
-              },
-              "/",
-              Object {
-                "Ref": "OpenApiOpenApiApiDeploymentStageprod143ED280",
-              },
-              "/POST/*/basic",
-            ],
-          ],
-        },
-      },
-      "Type": "AWS::Lambda::Permission",
-    },
-    "OpenApiOpenApiApiparamBodyValidatorB7E8FC6D": Object {
+    "OpenApiparamBodyValidator2BE5DCEC": Object {
       "Properties": Object {
         "RestApiId": Object {
-          "Ref": "OpenApiOpenApiApi2E1DE449",
+          "Ref": "OpenApi667EDE0B",
         },
         "ValidateRequestBody": true,
         "ValidateRequestParameters": true,
@@ -984,7 +985,7 @@ Object {
               },
               ":",
               Object {
-                "Ref": "OpenApiOpenApiApi2E1DE449",
+                "Ref": "OpenApi667EDE0B",
               },
               "/authorizers/",
               Object {
@@ -1114,7 +1115,7 @@ Object {
         "IdentitySource": "method.request.header.Authorization",
         "Name": "testblogAuthorizerD3C51414",
         "RestApiId": Object {
-          "Ref": "OpenApiOpenApiApi2E1DE449",
+          "Ref": "OpenApi667EDE0B",
         },
         "Type": "TOKEN",
       },

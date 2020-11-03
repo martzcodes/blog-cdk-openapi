@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "BlogCdkOpenApi",
-    "version": "2020-11-03T04:45:15.328Z"
+    "title": "OpenApi",
+    "version": "2020-11-03T17:22:12.760Z"
   },
   "paths": {
     "/{hello}/basic": {
@@ -21,7 +21,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": ""
+                "$ref": "#/components/schemas/BasicModel"
               }
             }
           },
@@ -79,7 +79,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": ""
+                "$ref": "#/components/schemas/AdvancedModel"
               }
             }
           },
@@ -132,8 +132,7 @@
             "type": "string"
           },
           "someNumber": {
-            "type": "number",
-            "pattern": "[0-9]+"
+            "type": "number"
           }
         },
         "required": [

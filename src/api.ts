@@ -1,5 +1,4 @@
 import { writeFileSync } from 'fs';
-import { join } from 'path';
 import {
   LambdaIntegration,
   Model,
@@ -11,7 +10,7 @@ import {
 } from '@aws-cdk/aws-apigateway';
 import { Function } from '@aws-cdk/aws-lambda';
 import { Construct } from '@aws-cdk/core';
-import { getSchemas } from './util/ast';
+import { getSchemas, updateSpecRefs } from './util/schema';
 
 interface CustomMethodResponse {
   statusCode: string;
@@ -38,7 +37,7 @@ interface OpenApiMethod {
     schema: { type: string };
   }[];
   requestBody: {
-    content: { 'application/json': { [key: string]: { $ref: string } } };
+    content: { [key: string]: { [key: string]: { $ref: string } } };
     required: boolean;
   };
   responses: {
@@ -85,6 +84,7 @@ export interface OpenApiSpec {
 }
 
 export interface OpenApiProps {
+  tsconfigPath: string;
   apiProps: RestApiProps;
   models: string;
 }
@@ -108,9 +108,10 @@ export class OpenApiConstruct extends Construct {
   constructor(scope: Construct, id: string, props: OpenApiProps) {
     super(scope, id);
 
-    this.restApi = new RestApi(this, `${id}Api`, props.apiProps);
+    this.restApi = new RestApi(this, `${id}`, props.apiProps);
     this.schemas = getSchemas(
-      `${__dirname}/interfaces`,
+      `${props.tsconfigPath}`,
+      `${props.models}`,
       this.restApi.restApiId,
     );
 
@@ -120,7 +121,7 @@ export class OpenApiConstruct extends Construct {
     this.openApiSpec = {
       openapi: '3.0.1',
       info: {
-        title: 'BlogCdkOpenApi',
+        title: `${id}`,
         version: new Date().toISOString(),
       },
       paths: {},
@@ -305,6 +306,11 @@ export class OpenApiConstruct extends Construct {
             this.schemas[pathProps.requestModels[c]],
           );
         }
+        this.openApiSpec.paths[path][method.toLowerCase()].requestBody.content[
+          c
+        ].schema.$ref = `#/components/schemas/${
+          this.schemas[pathProps.requestModels[c]].modelName
+        }`;
         return { ...p, [c]: this.models[pathProps.requestModels[c]] };
       }, {}),
       requestParameters: pathProps.requiredParameters.reduce((p, param) => {
@@ -340,8 +346,9 @@ export class OpenApiConstruct extends Construct {
     );
   }
 
-  generateOpenApiSpec(): OpenApiSpec {
-    writeFileSync(join(`${__dirname}`, '..', '/openapispec.json'), JSON.stringify(this.openApiSpec, null, 2));
+  generateOpenApiSpec(outputPath: string): OpenApiSpec {
+    updateSpecRefs(this.openApiSpec);
+    writeFileSync(outputPath, JSON.stringify(this.openApiSpec, null, 2));
     return this.openApiSpec;
   }
 }

@@ -1,3 +1,4 @@
+import { join } from 'path';
 import { TokenAuthorizer } from '@aws-cdk/aws-apigateway';
 import { Runtime } from '@aws-cdk/aws-lambda';
 import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
@@ -54,6 +55,7 @@ export class MyStack extends Stack {
     ];
 
     const api = new OpenApiConstruct(this, 'OpenApi', {
+      tsconfigPath: `${join(__dirname, '..', 'tsconfig.json')}`,
       apiProps: {
         defaultMethodOptions: {
           authorizer: auth,
@@ -81,7 +83,7 @@ export class MyStack extends Stack {
     });
 
     if (props.generateApiSpec) {
-      this.apiSpec = api.generateOpenApiSpec();
+      this.apiSpec = api.generateOpenApiSpec(join(`${__dirname}`, '..', 'openapispec.json'));
     }
   }
 }
