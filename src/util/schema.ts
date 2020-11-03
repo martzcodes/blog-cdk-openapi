@@ -81,5 +81,3 @@ export const getSchemas = (tsconfigPath: string, modelPath: string, restApi: str
   console.log(JSON.stringify(interfaces.Advanced, null, 2));
   return interfaces;
 };
-
-getSchemas('/Users/mattmartz/Development/blog/blog-cdk-openapi/tsconfig.json', '/Users/mattmartz/Development/blog/blog-cdk-openapi/src/interfaces', 'restApi');
