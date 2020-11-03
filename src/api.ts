@@ -90,7 +90,7 @@ export interface OpenApiProps {
 }
 
 export class OpenApiConstruct extends Construct {
-  restApi: RestApi;
+  public restApi: RestApi;
   validators: {
     [key: string]: RequestValidator;
   };
@@ -143,12 +143,28 @@ export class OpenApiConstruct extends Construct {
     }
   }
 
+  addValidator(key: string, params:boolean, body: boolean) {
+    if (Object.keys(this.validators).includes(key)) {
+      return;
+    }
+    this.validators[key] = this.restApi.addRequestValidator(
+      key,
+      {
+        validateRequestBody: body,
+        validateRequestParameters: params,
+      },
+    );
+  }
+
   addModel(modelName: string, modelSchema: ModelOptions) {
     if (
       modelSchema.modelName &&
       modelSchema.schema &&
       modelSchema.schema.properties
     ) {
+      if (Object.keys(this.models).includes(modelName)) {
+        return;
+      }
       this.models[modelName] = this.restApi.addModel(
         modelSchema.modelName,
         modelSchema as ModelOptions,
@@ -262,50 +278,20 @@ export class OpenApiConstruct extends Construct {
     };
     this.addResourcesForPath(path);
     const validator: { requestValidator?: RequestValidator } = {};
-    if (
-      pathProps.requiredParameters.length > 0 &&
-      Object.keys(pathProps.requestModels).length > 0
-    ) {
-      if (!('paramBodyValidator' in this.validators)) {
-        this.validators.paramBodyValidator = this.restApi.addRequestValidator(
-          'paramBodyValidator',
-          {
-            validateRequestBody: true,
-            validateRequestParameters: true,
-          },
-        );
-      }
-      validator.requestValidator = this.validators.paramBodyValidator;
-    } else if (pathProps.requiredParameters.length > 0) {
-      if (!('paramValidator' in this.validators)) {
-        this.validators.paramValidator = this.restApi.addRequestValidator(
-          'paramValidator',
-          {
-            validateRequestParameters: true,
-          },
-        );
-      }
-      validator.requestValidator = this.validators.paramValidator;
-    } else if (Object.keys(pathProps.requestModels).length > 0) {
-      if (!('bodyValidator' in this.validators)) {
-        this.validators.bodyValidator = this.restApi.addRequestValidator(
-          'bodyValidator',
-          {
-            validateRequestBody: true,
-          },
-        );
-      }
-      validator.requestValidator = this.validators.bodyValidator;
+    const validateBody = Object.keys(pathProps.requestModels).length > 0;
+    const validateParams = pathProps.requiredParameters.length > 0;
+    const validatorName = `validator${validateParams ? 'Params' : ''}${validateBody ? 'Body' : ''}`;
+    if (validateParams || validateBody) {
+      this.addValidator(validatorName, true, true);
+      validator.requestValidator = this.validators[validatorName];
     }
 
     const methodProps = {
       requestModels: Object.keys(pathProps.requestModels).reduce((p, c) => {
-        if (!(pathProps.requestModels[c] in this.models)) {
-          this.addModel(
-            pathProps.requestModels[c],
-            this.schemas[pathProps.requestModels[c]],
-          );
-        }
+        this.addModel(
+          pathProps.requestModels[c],
+          this.schemas[pathProps.requestModels[c]],
+        );
         this.openApiSpec.paths[path][method.toLowerCase()].requestBody.content[
           c
         ].schema.$ref = `#/components/schemas/${
@@ -322,12 +308,10 @@ export class OpenApiConstruct extends Construct {
           ...methodResponse,
           responseModels: Object.keys(methodResponse.responseModels).reduce(
             (p, c) => {
-              if (!(methodResponse.responseModels[c] in this.models)) {
-                this.addModel(
-                  methodResponse.responseModels[c],
-                  this.schemas[methodResponse.responseModels[c]],
-                );
-              }
+              this.addModel(
+                methodResponse.responseModels[c],
+                this.schemas[methodResponse.responseModels[c]],
+              );
               return {
                 ...p,
                 [c]: this.models[methodResponse.responseModels[c]],

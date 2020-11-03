@@ -377,7 +377,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "OpenApiDeployment46B898978a783031191b66b80db5aaef44577382": Object {
+    "OpenApiDeployment46B89897ffacea3a56c4a685a19102334be90af9": Object {
       "DependsOn": Array [
         "OpenApiAdvancedModelF9EAD729",
         "OpenApiBasicModel9C5F67F6",
@@ -386,8 +386,8 @@ Object {
         "OpenApihellobasicPOSTF675B7C6",
         "OpenApihellobasic064FEE77",
         "OpenApihello8A8BE927",
-        "OpenApiparamBodyValidator2BE5DCEC",
         "OpenApiResponseModel05515321",
+        "OpenApivalidatorParamsBodyA1B3230E",
       ],
       "Properties": Object {
         "Description": "Automatically created by the RestApi construct",
@@ -400,7 +400,7 @@ Object {
     "OpenApiDeploymentStageprod3BBCA9DE": Object {
       "Properties": Object {
         "DeploymentId": Object {
-          "Ref": "OpenApiDeployment46B898978a783031191b66b80db5aaef44577382",
+          "Ref": "OpenApiDeployment46B89897ffacea3a56c4a685a19102334be90af9",
         },
         "RestApiId": Object {
           "Ref": "OpenApi667EDE0B",
@@ -518,7 +518,7 @@ Object {
           "method.request.path.hello": true,
         },
         "RequestValidatorId": Object {
-          "Ref": "OpenApiparamBodyValidator2BE5DCEC",
+          "Ref": "OpenApivalidatorParamsBodyA1B3230E",
         },
         "ResourceId": Object {
           "Ref": "OpenApihelloadvanced433A9690",
@@ -755,7 +755,7 @@ Object {
           "method.request.path.hello": true,
         },
         "RequestValidatorId": Object {
-          "Ref": "OpenApiparamBodyValidator2BE5DCEC",
+          "Ref": "OpenApivalidatorParamsBodyA1B3230E",
         },
         "ResourceId": Object {
           "Ref": "OpenApihellobasic064FEE77",
@@ -766,7 +766,7 @@ Object {
       },
       "Type": "AWS::ApiGateway::Method",
     },
-    "OpenApiparamBodyValidator2BE5DCEC": Object {
+    "OpenApivalidatorParamsBodyA1B3230E": Object {
       "Properties": Object {
         "RestApiId": Object {
           "Ref": "OpenApi667EDE0B",

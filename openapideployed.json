@@ -1,11 +1,11 @@
 {
   "openapi" : "3.0.1",
   "info" : {
-    "title" : "OpenApiApi",
-    "version" : "2020-11-02T06:03:49Z"
+    "title" : "OpenApi",
+    "version" : "2020-11-03T18:05:43Z"
   },
   "servers" : [ {
-    "url" : "https://w1gy9fvdsa.execute-api.us-east-1.amazonaws.com/{basePath}",
+    "url" : "https://c638jrlvt0.execute-api.us-east-1.amazonaws.com/{basePath}",
     "variables" : {
       "basePath" : {
         "default" : "/prod"
@@ -130,13 +130,13 @@
         "type" : "object",
         "properties" : {
           "someNumber" : {
-            "pattern" : "[0-9]+",
             "type" : "number"
           },
           "someString" : {
             "type" : "string"
           }
-        }
+        },
+        "additionalProperties" : false
       },
       "ResponseModel" : {
         "title" : "ResponseModel",
@@ -146,7 +146,8 @@
           "message" : {
             "type" : "string"
           }
-        }
+        },
+        "additionalProperties" : false
       },
       "AdvancedModel" : {
         "title" : "AdvancedModel",
@@ -162,7 +163,8 @@
           "basic" : {
             "$ref" : "#/components/schemas/BasicModel"
           }
-        }
+        },
+        "additionalProperties" : false
       }
     },
     "securitySchemes" : {

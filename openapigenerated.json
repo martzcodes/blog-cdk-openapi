@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "OpenApi",
-    "version": "2020-11-03T17:22:12.760Z"
+    "version": "2020-11-03T18:13:14.179Z"
   },
   "paths": {
     "/{hello}/basic": {

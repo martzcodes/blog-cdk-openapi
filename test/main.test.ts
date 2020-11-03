@@ -1,6 +1,6 @@
 import '@aws-cdk/assert/jest';
 import { App } from '@aws-cdk/core';
-import * as deployedApiSpec from '../deployedopenapi.json';
+import * as deployedApiSpec from '../openapideployed.json';
 import { MyStack } from '../src/main';
 
 test('Snapshot', () => {

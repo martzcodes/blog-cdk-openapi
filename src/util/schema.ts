@@ -30,7 +30,8 @@ const updateApiRefs = (obj: any, restApi: string) => {
   if (typeof obj !== 'object' || obj === null) return;
   if (typeof obj.$ref !== 'undefined') {
     const refSplit = obj.$ref.split('/');
-    obj.$ref = `https://apigateway.amazonaws.com/restapis/${restApi}/models/${refSplit[refSplit.length-1]}Model`;
+    obj.ref = `https://apigateway.amazonaws.com/restapis/${restApi}/models/${refSplit[refSplit.length-1]}Model`;
+    delete obj.$ref;
   }
   Object.keys(obj).forEach((key) => {
     if (!(obj === obj[key] || !obj.hasOwnProperty(key))) {
@@ -41,9 +42,10 @@ const updateApiRefs = (obj: any, restApi: string) => {
 
 export const updateSpecRefs = (obj: any) => {
   if (typeof obj !== 'object' || obj === null) return;
-  if (typeof obj.$ref !== 'undefined') {
-    const refSplit = obj.$ref.split('/');
+  if (typeof obj.ref !== 'undefined') {
+    const refSplit = obj.ref.split('/');
     obj.$ref = `#/components/schemas/${refSplit[refSplit.length-1]}`;
+    delete obj.ref;
   }
   Object.keys(obj).forEach((key) => {
     if (!(obj === obj[key] || !obj.hasOwnProperty(key))) {
@@ -76,5 +78,8 @@ export const getSchemas = (tsconfigPath: string, modelPath: string, restApi: str
     }, {} as { [key: string]: ModelOptions });
   updateApiRefs(interfaces, restApi);
 
+  console.log(JSON.stringify(interfaces.Advanced, null, 2));
   return interfaces;
 };
+
+getSchemas('/Users/mattmartz/Development/blog/blog-cdk-openapi/tsconfig.json', '/Users/mattmartz/Development/blog/blog-cdk-openapi/src/interfaces', 'restApi');

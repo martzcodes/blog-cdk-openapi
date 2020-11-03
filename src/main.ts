@@ -83,7 +83,7 @@ export class MyStack extends Stack {
     });
 
     if (props.generateApiSpec) {
-      this.apiSpec = api.generateOpenApiSpec(join(`${__dirname}`, '..', 'openapispec.json'));
+      this.apiSpec = api.generateOpenApiSpec(join(`${__dirname}`, '..', 'openapigenerated.json'));
     }
   }
 }
