@@ -9,3 +9,9 @@ aws apigateway get-export --parameters extensions='postman' --rest-api-id x4h3yi
 ```
 
 Where `x4h3yibjr3` is your api id
+
+OpenApi 3.0 Spec from AWS Console / cli:
+https://editor.swagger.io/?url=https://raw.githubusercontent.com/martzcodes/blog-cdk-openapi/main/deployedopenapi.json
+
+Generated from project:
+https://editor.swagger.io/?url=https://raw.githubusercontent.com/martzcodes/blog-cdk-openapi/main/openapispec.json

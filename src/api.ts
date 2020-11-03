@@ -1,3 +1,5 @@
+import { writeFileSync } from 'fs';
+import { join } from 'path';
 import {
   LambdaIntegration,
   Model,
@@ -49,7 +51,7 @@ interface OpenApiMethod {
   security: { [key: string]: [] }[];
 }
 
-interface OpenApiSpec {
+export interface OpenApiSpec {
   openapi: string;
   info: { title: string; version: string };
   paths: {
@@ -339,6 +341,7 @@ export class OpenApiConstruct extends Construct {
   }
 
   generateOpenApiSpec(): OpenApiSpec {
+    writeFileSync(join(`${__dirname}`, '..', '/openapispec.json'), JSON.stringify(this.openApiSpec, null, 2));
     return this.openApiSpec;
   }
 }

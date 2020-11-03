@@ -1,16 +1,204 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Api Spec 1`] = `
+Object {
+  "components": Object {
+    "schemas": Object {
+      "AdvancedModel": Object {
+        "properties": Object {
+          "basic": Object {
+            "$ref": "#/components/schemas/BasicModel",
+          },
+          "greeting": Object {
+            "type": "string",
+          },
+          "postfix": Object {
+            "type": "string",
+          },
+        },
+        "required": Array [
+          "greeting",
+          "basic",
+        ],
+        "title": "AdvancedModel",
+        "type": "object",
+      },
+      "BasicModel": Object {
+        "properties": Object {
+          "someNumber": Object {
+            "pattern": "[0-9]+",
+            "type": "number",
+          },
+          "someString": Object {
+            "type": "string",
+          },
+        },
+        "required": Array [
+          "someString",
+          "someNumber",
+        ],
+        "title": "BasicModel",
+        "type": "object",
+      },
+      "ResponseModel": Object {
+        "properties": Object {
+          "message": Object {
+            "type": "string",
+          },
+        },
+        "required": Array [
+          "message",
+        ],
+        "title": "ResponseModel",
+        "type": "object",
+      },
+    },
+    "securitySchemes": Object {
+      "authorizer": Object {
+        "in": "header",
+        "name": "Authorization",
+        "type": "apiKey",
+        "x-amazon-apigateway-authtype": "custom",
+      },
+    },
+  },
+  "info": Object {
+    "title": "BlogCdkOpenApi",
+    "version": Any<String>,
+  },
+  "openapi": "3.0.1",
+  "paths": Object {
+    "/{hello}/advanced": Object {
+      "post": Object {
+        "parameters": Array [
+          Object {
+            "in": "path",
+            "name": "hello",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+          },
+        ],
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "$ref": "",
+              },
+            },
+          },
+          "required": true,
+        },
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "$ref": "#/components/schemas/ResponseModel",
+                },
+              },
+            },
+            "description": "200 response",
+            "headers": Object {
+              "Access-Control-Allow-Credentials": Object {
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "Access-Control-Allow-Origin": Object {
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "Content-Type": Object {
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+          },
+        },
+        "security": Array [
+          Object {
+            "authorizer": Array [],
+          },
+        ],
+      },
+    },
+    "/{hello}/basic": Object {
+      "post": Object {
+        "parameters": Array [
+          Object {
+            "in": "path",
+            "name": "hello",
+            "required": true,
+            "schema": Object {
+              "type": "string",
+            },
+          },
+        ],
+        "requestBody": Object {
+          "content": Object {
+            "application/json": Object {
+              "schema": Object {
+                "$ref": "",
+              },
+            },
+          },
+          "required": true,
+        },
+        "responses": Object {
+          "200": Object {
+            "content": Object {
+              "application/json": Object {
+                "schema": Object {
+                  "$ref": "#/components/schemas/ResponseModel",
+                },
+              },
+            },
+            "description": "200 response",
+            "headers": Object {
+              "Access-Control-Allow-Credentials": Object {
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "Access-Control-Allow-Origin": Object {
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+              "Content-Type": Object {
+                "schema": Object {
+                  "type": "string",
+                },
+              },
+            },
+          },
+        },
+        "security": Array [
+          Object {
+            "authorizer": Array [],
+          },
+        ],
+      },
+    },
+  },
+}
+`;
+
 exports[`Snapshot 1`] = `
 Object {
   "Outputs": Object {
-    "BlogCdkOpenApiEndpoint55A61344": Object {
+    "OpenApiOpenApiApiEndpoint756A510B": Object {
       "Value": Object {
         "Fn::Join": Array [
           "",
           Array [
             "https://",
             Object {
-              "Ref": "BlogCdkOpenApiFB41E0D8",
+              "Ref": "OpenApiOpenApiApi2E1DE449",
             },
             ".execute-api.",
             Object {
@@ -22,7 +210,7 @@ Object {
             },
             "/",
             Object {
-              "Ref": "BlogCdkOpenApiDeploymentStageprod79C95C6F",
+              "Ref": "OpenApiOpenApiApiDeploymentStageprod143ED280",
             },
             "/",
           ],
@@ -69,26 +257,32 @@ Object {
     },
   },
   "Resources": Object {
-    "BlogCdkOpenApiAccountAB98B433": Object {
+    "OpenApiOpenApiApi2E1DE449": Object {
+      "Properties": Object {
+        "Name": "OpenApiApi",
+      },
+      "Type": "AWS::ApiGateway::RestApi",
+    },
+    "OpenApiOpenApiApiAccountA1F35474": Object {
       "DependsOn": Array [
-        "BlogCdkOpenApiFB41E0D8",
+        "OpenApiOpenApiApi2E1DE449",
       ],
       "Properties": Object {
         "CloudWatchRoleArn": Object {
           "Fn::GetAtt": Array [
-            "BlogCdkOpenApiCloudWatchRoleF880F18B",
+            "OpenApiOpenApiApiCloudWatchRole26232647",
             "Arn",
           ],
         },
       },
       "Type": "AWS::ApiGateway::Account",
     },
-    "BlogCdkOpenApiAdvancedModel13201060": Object {
+    "OpenApiOpenApiApiAdvancedModelD703FA70": Object {
       "Properties": Object {
         "ContentType": "application/json",
         "Name": "AdvancedModel",
         "RestApiId": Object {
-          "Ref": "BlogCdkOpenApiFB41E0D8",
+          "Ref": "OpenApiOpenApiApi2E1DE449",
         },
         "Schema": Object {
           "$schema": "http://json-schema.org/draft-04/schema#",
@@ -100,12 +294,9 @@ Object {
                   Array [
                     "https://apigateway.amazonaws.com/restapis/",
                     Object {
-                      "Ref": "BlogCdkOpenApiFB41E0D8",
+                      "Ref": "OpenApiOpenApiApi2E1DE449",
                     },
-                    "/models/",
-                    Object {
-                      "Ref": "BlogCdkOpenApiBasicModelBDDDB603",
-                    },
+                    "/models/BasicModel",
                   ],
                 ],
               },
@@ -121,28 +312,18 @@ Object {
             "greeting",
             "basic",
           ],
-          "title": "advancedModel",
+          "title": "AdvancedModel",
           "type": "object",
         },
       },
       "Type": "AWS::ApiGateway::Model",
     },
-    "BlogCdkOpenApiAdvancedValidator8BED0356": Object {
-      "Properties": Object {
-        "RestApiId": Object {
-          "Ref": "BlogCdkOpenApiFB41E0D8",
-        },
-        "ValidateRequestBody": true,
-        "ValidateRequestParameters": true,
-      },
-      "Type": "AWS::ApiGateway::RequestValidator",
-    },
-    "BlogCdkOpenApiBasicModelBDDDB603": Object {
+    "OpenApiOpenApiApiBasicModel1A7FD6A8": Object {
       "Properties": Object {
         "ContentType": "application/json",
         "Name": "BasicModel",
         "RestApiId": Object {
-          "Ref": "BlogCdkOpenApiFB41E0D8",
+          "Ref": "OpenApiOpenApiApi2E1DE449",
         },
         "Schema": Object {
           "$schema": "http://json-schema.org/draft-04/schema#",
@@ -159,23 +340,13 @@ Object {
             "someString",
             "someNumber",
           ],
-          "title": "basicModel",
+          "title": "BasicModel",
           "type": "object",
         },
       },
       "Type": "AWS::ApiGateway::Model",
     },
-    "BlogCdkOpenApiBasicValidatorF3CF54EE": Object {
-      "Properties": Object {
-        "RestApiId": Object {
-          "Ref": "BlogCdkOpenApiFB41E0D8",
-        },
-        "ValidateRequestBody": true,
-        "ValidateRequestParameters": true,
-      },
-      "Type": "AWS::ApiGateway::RequestValidator",
-    },
-    "BlogCdkOpenApiCloudWatchRoleF880F18B": Object {
+    "OpenApiOpenApiApiCloudWatchRole26232647": Object {
       "Properties": Object {
         "AssumeRolePolicyDocument": Object {
           "Statement": Array [
@@ -206,51 +377,44 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "BlogCdkOpenApiDeployment0D9F2E53fb6bfd5d6ea7bf5817f02df1d1c44870": Object {
+    "OpenApiOpenApiApiDeployment4D8213A63de7627c589dd84322c511723a574653": Object {
       "DependsOn": Array [
-        "BlogCdkOpenApiAdvancedModel13201060",
-        "BlogCdkOpenApiAdvancedValidator8BED0356",
-        "BlogCdkOpenApiBasicModelBDDDB603",
-        "BlogCdkOpenApiBasicValidatorF3CF54EE",
-        "BlogCdkOpenApihelloadvancedPOST90624F15",
-        "BlogCdkOpenApihelloadvancedFD510138",
-        "BlogCdkOpenApihellobasicPOST329610FB",
-        "BlogCdkOpenApihellobasic64ACA8DC",
-        "BlogCdkOpenApihello2DBB167A",
-        "BlogCdkOpenApiResponseModel4D137934",
+        "OpenApiOpenApiApiAdvancedModelD703FA70",
+        "OpenApiOpenApiApiBasicModel1A7FD6A8",
+        "OpenApiOpenApiApihelloadvancedPOST9541C057",
+        "OpenApiOpenApiApihelloadvanced545D9C56",
+        "OpenApiOpenApiApihellobasicPOST2DD93CCE",
+        "OpenApiOpenApiApihellobasic894AB878",
+        "OpenApiOpenApiApihello7632442C",
+        "OpenApiOpenApiApiparamBodyValidatorB7E8FC6D",
+        "OpenApiOpenApiApiResponseModel3EE343F8",
       ],
       "Properties": Object {
         "Description": "Automatically created by the RestApi construct",
         "RestApiId": Object {
-          "Ref": "BlogCdkOpenApiFB41E0D8",
+          "Ref": "OpenApiOpenApiApi2E1DE449",
         },
       },
       "Type": "AWS::ApiGateway::Deployment",
     },
-    "BlogCdkOpenApiDeploymentStageprod79C95C6F": Object {
+    "OpenApiOpenApiApiDeploymentStageprod143ED280": Object {
       "Properties": Object {
         "DeploymentId": Object {
-          "Ref": "BlogCdkOpenApiDeployment0D9F2E53fb6bfd5d6ea7bf5817f02df1d1c44870",
+          "Ref": "OpenApiOpenApiApiDeployment4D8213A63de7627c589dd84322c511723a574653",
         },
         "RestApiId": Object {
-          "Ref": "BlogCdkOpenApiFB41E0D8",
+          "Ref": "OpenApiOpenApiApi2E1DE449",
         },
         "StageName": "prod",
       },
       "Type": "AWS::ApiGateway::Stage",
     },
-    "BlogCdkOpenApiFB41E0D8": Object {
-      "Properties": Object {
-        "Name": "BlogCdkOpenApi",
-      },
-      "Type": "AWS::ApiGateway::RestApi",
-    },
-    "BlogCdkOpenApiResponseModel4D137934": Object {
+    "OpenApiOpenApiApiResponseModel3EE343F8": Object {
       "Properties": Object {
         "ContentType": "application/json",
         "Name": "ResponseModel",
         "RestApiId": Object {
-          "Ref": "BlogCdkOpenApiFB41E0D8",
+          "Ref": "OpenApiOpenApiApi2E1DE449",
         },
         "Schema": Object {
           "$schema": "http://json-schema.org/draft-04/schema#",
@@ -259,40 +423,43 @@ Object {
               "type": "string",
             },
           },
-          "title": "responseModel",
+          "required": Array [
+            "message",
+          ],
+          "title": "ResponseModel",
           "type": "object",
         },
       },
       "Type": "AWS::ApiGateway::Model",
     },
-    "BlogCdkOpenApihello2DBB167A": Object {
+    "OpenApiOpenApiApihello7632442C": Object {
       "Properties": Object {
         "ParentId": Object {
           "Fn::GetAtt": Array [
-            "BlogCdkOpenApiFB41E0D8",
+            "OpenApiOpenApiApi2E1DE449",
             "RootResourceId",
           ],
         },
         "PathPart": "{hello}",
         "RestApiId": Object {
-          "Ref": "BlogCdkOpenApiFB41E0D8",
+          "Ref": "OpenApiOpenApiApi2E1DE449",
         },
       },
       "Type": "AWS::ApiGateway::Resource",
     },
-    "BlogCdkOpenApihelloadvancedFD510138": Object {
+    "OpenApiOpenApiApihelloadvanced545D9C56": Object {
       "Properties": Object {
         "ParentId": Object {
-          "Ref": "BlogCdkOpenApihello2DBB167A",
+          "Ref": "OpenApiOpenApiApihello7632442C",
         },
         "PathPart": "advanced",
         "RestApiId": Object {
-          "Ref": "BlogCdkOpenApiFB41E0D8",
+          "Ref": "OpenApiOpenApiApi2E1DE449",
         },
       },
       "Type": "AWS::ApiGateway::Resource",
     },
-    "BlogCdkOpenApihelloadvancedPOST90624F15": Object {
+    "OpenApiOpenApiApihelloadvancedPOST9541C057": Object {
       "Properties": Object {
         "AuthorizationType": "CUSTOM",
         "AuthorizerId": Object {
@@ -330,7 +497,7 @@ Object {
           Object {
             "ResponseModels": Object {
               "application/json": Object {
-                "Ref": "BlogCdkOpenApiResponseModel4D137934",
+                "Ref": "OpenApiOpenApiApiResponseModel3EE343F8",
               },
             },
             "ResponseParameters": Object {
@@ -343,25 +510,25 @@ Object {
         ],
         "RequestModels": Object {
           "application/json": Object {
-            "Ref": "BlogCdkOpenApiAdvancedModel13201060",
+            "Ref": "OpenApiOpenApiApiAdvancedModelD703FA70",
           },
         },
         "RequestParameters": Object {
           "method.request.path.hello": true,
         },
         "RequestValidatorId": Object {
-          "Ref": "BlogCdkOpenApiAdvancedValidator8BED0356",
+          "Ref": "OpenApiOpenApiApiparamBodyValidatorB7E8FC6D",
         },
         "ResourceId": Object {
-          "Ref": "BlogCdkOpenApihelloadvancedFD510138",
+          "Ref": "OpenApiOpenApiApihelloadvanced545D9C56",
         },
         "RestApiId": Object {
-          "Ref": "BlogCdkOpenApiFB41E0D8",
+          "Ref": "OpenApiOpenApiApi2E1DE449",
         },
       },
       "Type": "AWS::ApiGateway::Method",
     },
-    "BlogCdkOpenApihelloadvancedPOSTApiPermissionTesttestBlogCdkOpenApiBE069CDBPOSThelloadvanced39605CA4": Object {
+    "OpenApiOpenApiApihelloadvancedPOSTApiPermissionTesttestOpenApiOpenApiApi003C76EEPOSThelloadvanced473E8794": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -389,7 +556,7 @@ Object {
               },
               ":",
               Object {
-                "Ref": "BlogCdkOpenApiFB41E0D8",
+                "Ref": "OpenApiOpenApiApi2E1DE449",
               },
               "/test-invoke-stage/POST/*/advanced",
             ],
@@ -398,7 +565,7 @@ Object {
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "BlogCdkOpenApihelloadvancedPOSTApiPermissiontestBlogCdkOpenApiBE069CDBPOSThelloadvancedF6B7F39F": Object {
+    "OpenApiOpenApiApihelloadvancedPOSTApiPermissiontestOpenApiOpenApiApi003C76EEPOSThelloadvancedDF46C5F1": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -426,11 +593,11 @@ Object {
               },
               ":",
               Object {
-                "Ref": "BlogCdkOpenApiFB41E0D8",
+                "Ref": "OpenApiOpenApiApi2E1DE449",
               },
               "/",
               Object {
-                "Ref": "BlogCdkOpenApiDeploymentStageprod79C95C6F",
+                "Ref": "OpenApiOpenApiApiDeploymentStageprod143ED280",
               },
               "/POST/*/advanced",
             ],
@@ -439,19 +606,19 @@ Object {
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "BlogCdkOpenApihellobasic64ACA8DC": Object {
+    "OpenApiOpenApiApihellobasic894AB878": Object {
       "Properties": Object {
         "ParentId": Object {
-          "Ref": "BlogCdkOpenApihello2DBB167A",
+          "Ref": "OpenApiOpenApiApihello7632442C",
         },
         "PathPart": "basic",
         "RestApiId": Object {
-          "Ref": "BlogCdkOpenApiFB41E0D8",
+          "Ref": "OpenApiOpenApiApi2E1DE449",
         },
       },
       "Type": "AWS::ApiGateway::Resource",
     },
-    "BlogCdkOpenApihellobasicPOST329610FB": Object {
+    "OpenApiOpenApiApihellobasicPOST2DD93CCE": Object {
       "Properties": Object {
         "AuthorizationType": "CUSTOM",
         "AuthorizerId": Object {
@@ -489,7 +656,7 @@ Object {
           Object {
             "ResponseModels": Object {
               "application/json": Object {
-                "Ref": "BlogCdkOpenApiResponseModel4D137934",
+                "Ref": "OpenApiOpenApiApiResponseModel3EE343F8",
               },
             },
             "ResponseParameters": Object {
@@ -502,25 +669,25 @@ Object {
         ],
         "RequestModels": Object {
           "application/json": Object {
-            "Ref": "BlogCdkOpenApiBasicModelBDDDB603",
+            "Ref": "OpenApiOpenApiApiBasicModel1A7FD6A8",
           },
         },
         "RequestParameters": Object {
           "method.request.path.hello": true,
         },
         "RequestValidatorId": Object {
-          "Ref": "BlogCdkOpenApiBasicValidatorF3CF54EE",
+          "Ref": "OpenApiOpenApiApiparamBodyValidatorB7E8FC6D",
         },
         "ResourceId": Object {
-          "Ref": "BlogCdkOpenApihellobasic64ACA8DC",
+          "Ref": "OpenApiOpenApiApihellobasic894AB878",
         },
         "RestApiId": Object {
-          "Ref": "BlogCdkOpenApiFB41E0D8",
+          "Ref": "OpenApiOpenApiApi2E1DE449",
         },
       },
       "Type": "AWS::ApiGateway::Method",
     },
-    "BlogCdkOpenApihellobasicPOSTApiPermissionTesttestBlogCdkOpenApiBE069CDBPOSThellobasic7627E4A1": Object {
+    "OpenApiOpenApiApihellobasicPOSTApiPermissionTesttestOpenApiOpenApiApi003C76EEPOSThellobasic1B1480BE": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -548,7 +715,7 @@ Object {
               },
               ":",
               Object {
-                "Ref": "BlogCdkOpenApiFB41E0D8",
+                "Ref": "OpenApiOpenApiApi2E1DE449",
               },
               "/test-invoke-stage/POST/*/basic",
             ],
@@ -557,7 +724,7 @@ Object {
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "BlogCdkOpenApihellobasicPOSTApiPermissiontestBlogCdkOpenApiBE069CDBPOSThellobasic15B49607": Object {
+    "OpenApiOpenApiApihellobasicPOSTApiPermissiontestOpenApiOpenApiApi003C76EEPOSThellobasic15B41AC8": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -585,11 +752,11 @@ Object {
               },
               ":",
               Object {
-                "Ref": "BlogCdkOpenApiFB41E0D8",
+                "Ref": "OpenApiOpenApiApi2E1DE449",
               },
               "/",
               Object {
-                "Ref": "BlogCdkOpenApiDeploymentStageprod79C95C6F",
+                "Ref": "OpenApiOpenApiApiDeploymentStageprod143ED280",
               },
               "/POST/*/basic",
             ],
@@ -597,6 +764,16 @@ Object {
         },
       },
       "Type": "AWS::Lambda::Permission",
+    },
+    "OpenApiOpenApiApiparamBodyValidatorB7E8FC6D": Object {
+      "Properties": Object {
+        "RestApiId": Object {
+          "Ref": "OpenApiOpenApiApi2E1DE449",
+        },
+        "ValidateRequestBody": true,
+        "ValidateRequestParameters": true,
+      },
+      "Type": "AWS::ApiGateway::RequestValidator",
     },
     "advancedLambdaFunction225720E0": Object {
       "DependsOn": Array [
@@ -807,7 +984,7 @@ Object {
               },
               ":",
               Object {
-                "Ref": "BlogCdkOpenApiFB41E0D8",
+                "Ref": "OpenApiOpenApiApi2E1DE449",
               },
               "/authorizers/",
               Object {
@@ -937,7 +1114,7 @@ Object {
         "IdentitySource": "method.request.header.Authorization",
         "Name": "testblogAuthorizerD3C51414",
         "RestApiId": Object {
-          "Ref": "BlogCdkOpenApiFB41E0D8",
+          "Ref": "OpenApiOpenApiApi2E1DE449",
         },
         "Type": "TOKEN",
       },

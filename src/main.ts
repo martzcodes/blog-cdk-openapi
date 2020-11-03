@@ -2,10 +2,15 @@ import { TokenAuthorizer } from '@aws-cdk/aws-apigateway';
 import { Runtime } from '@aws-cdk/aws-lambda';
 import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
 import { App, Construct, Stack, StackProps } from '@aws-cdk/core';
-import { OpenApiConstruct } from './api';
+import { OpenApiConstruct, OpenApiSpec } from './api';
 
+interface MyStackProps extends StackProps {
+  generateApiSpec: boolean;
+}
 export class MyStack extends Stack {
-  constructor(scope: Construct, id: string, props: StackProps = {}) {
+  public apiSpec?: OpenApiSpec;
+
+  constructor(scope: Construct, id: string, props: MyStackProps = { generateApiSpec: false }) {
     super(scope, id, props);
 
     const basicLambda = new NodejsFunction(this, 'basicLambdaFunction', {
@@ -75,7 +80,9 @@ export class MyStack extends Stack {
       methodResponses,
     });
 
-    console.log(JSON.stringify(api.generateOpenApiSpec(), null, 2));
+    if (props.generateApiSpec) {
+      this.apiSpec = api.generateOpenApiSpec();
+    }
   }
 }
 
@@ -87,6 +94,6 @@ const devEnv = {
 
 const app = new App();
 
-new MyStack(app, 'blog-cdk-openapi', { env: devEnv });
+new MyStack(app, 'blog-cdk-openapi', { env: devEnv, generateApiSpec: false });
 
 app.synth();

@@ -1,0 +1,185 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "BlogCdkOpenApi",
+    "version": "2020-11-03T04:45:15.328Z"
+  },
+  "paths": {
+    "/{hello}/basic": {
+      "post": {
+        "parameters": [
+          {
+            "name": "hello",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": ""
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Credentials": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseModel"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "authorizer": []
+          }
+        ]
+      }
+    },
+    "/{hello}/advanced": {
+      "post": {
+        "parameters": [
+          {
+            "name": "hello",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": ""
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Credentials": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseModel"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "authorizer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BasicModel": {
+        "title": "BasicModel",
+        "type": "object",
+        "properties": {
+          "someString": {
+            "type": "string"
+          },
+          "someNumber": {
+            "type": "number",
+            "pattern": "[0-9]+"
+          }
+        },
+        "required": [
+          "someString",
+          "someNumber"
+        ]
+      },
+      "ResponseModel": {
+        "title": "ResponseModel",
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      },
+      "AdvancedModel": {
+        "title": "AdvancedModel",
+        "type": "object",
+        "properties": {
+          "greeting": {
+            "type": "string"
+          },
+          "basic": {
+            "$ref": "#/components/schemas/BasicModel"
+          },
+          "postfix": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "greeting",
+          "basic"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "authorizer": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "x-amazon-apigateway-authtype": "custom"
+      }
+    }
+  }
+}
