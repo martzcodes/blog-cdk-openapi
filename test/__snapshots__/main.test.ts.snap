@@ -285,7 +285,6 @@ Object {
         },
         "Schema": Object {
           "$schema": "http://json-schema.org/draft-07/schema#",
-          "additionalProperties": false,
           "properties": Object {
             "basic": Object {
               "$ref": Object {
@@ -327,7 +326,6 @@ Object {
         },
         "Schema": Object {
           "$schema": "http://json-schema.org/draft-07/schema#",
-          "additionalProperties": false,
           "properties": Object {
             "someNumber": Object {
               "type": "number",
@@ -377,7 +375,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "OpenApiDeployment46B89897ffacea3a56c4a685a19102334be90af9": Object {
+    "OpenApiDeployment46B89897cd429c3d0e7303d2e7df1bff5fa6213e": Object {
       "DependsOn": Array [
         "OpenApiAdvancedModelF9EAD729",
         "OpenApiBasicModel9C5F67F6",
@@ -400,7 +398,7 @@ Object {
     "OpenApiDeploymentStageprod3BBCA9DE": Object {
       "Properties": Object {
         "DeploymentId": Object {
-          "Ref": "OpenApiDeployment46B89897ffacea3a56c4a685a19102334be90af9",
+          "Ref": "OpenApiDeployment46B89897cd429c3d0e7303d2e7df1bff5fa6213e",
         },
         "RestApiId": Object {
           "Ref": "OpenApi667EDE0B",
@@ -418,7 +416,6 @@ Object {
         },
         "Schema": Object {
           "$schema": "http://json-schema.org/draft-07/schema#",
-          "additionalProperties": false,
           "properties": Object {
             "message": Object {
               "type": "string",

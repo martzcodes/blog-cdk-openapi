@@ -1,16 +1,9 @@
 import { readdirSync } from 'fs';
 import { join as pathJoin } from 'path';
-import {
-  JsonSchema,
-  JsonSchemaVersion,
-  ModelOptions,
-} from '@aws-cdk/aws-apigateway';
+import { JsonSchema, JsonSchemaVersion, ModelOptions } from '@aws-cdk/aws-apigateway';
 import { createGenerator } from 'ts-json-schema-generator';
 
-const interfaceTemplate = (
-  interfaceName: string,
-  schemaProps: JsonSchema,
-): ModelOptions => ({
+const interfaceTemplate = (interfaceName: string, schemaProps: JsonSchema): ModelOptions => ({
   contentType: 'application/json',
   modelName: `${interfaceName}Model`,
   schema: {
@@ -26,46 +19,62 @@ const getConfig = (tsconfig: string, path: string) => ({
   type: '*',
 });
 
-const updateApiRefs = (obj: any, restApi: string) => {
+const hasRef = (obj: unknown): obj is { ref?: string; $ref?: string } => {
+  return (
+    !!obj &&
+    typeof obj === 'object' &&
+    ('ref' in (obj as Record<string, unknown>) || '$ref' in (obj as Record<string, unknown>))
+  );
+};
+
+const hasAdditionalProperties = (obj: unknown): obj is { additionalProperties?: unknown } => {
+  return !!obj && typeof obj === 'object' && 'additionalProperties' in (obj as Record<string, unknown>);
+};
+
+export const updateApiRefs = (obj: unknown | Record<string, unknown>, restApi: string): void => {
   if (typeof obj !== 'object' || obj === null) return;
-  if (typeof obj.$ref !== 'undefined') {
+  if (hasRef(obj) && obj.$ref) {
     const refSplit = obj.$ref.split('/');
-    obj.ref = `https://apigateway.amazonaws.com/restapis/${restApi}/models/${refSplit[refSplit.length-1]}Model`;
+    obj.ref = `https://apigateway.amazonaws.com/restapis/${restApi}/models/${refSplit[refSplit.length - 1]}Model`;
     delete obj.$ref;
   }
+  if (hasAdditionalProperties(obj)) {
+    // TODO: additional properties tend to cause problems with openapi specs... remove for now
+    delete obj.additionalProperties;
+  }
   Object.keys(obj).forEach((key) => {
-    if (!(obj === obj[key] || !obj.hasOwnProperty(key))) {
-      updateApiRefs(obj[key], restApi);
-    }
+    updateApiRefs((obj as Record<string, unknown>)[key], restApi);
   });
 };
 
-export const updateSpecRefs = (obj: any) => {
+export const apiToSpec = (obj: unknown | Record<string, unknown>): void => {
   if (typeof obj !== 'object' || obj === null) return;
-  if (typeof obj.ref !== 'undefined') {
+  if (hasRef(obj) && obj.ref) {
     const refSplit = obj.ref.split('/');
-    obj.$ref = `#/components/schemas/${refSplit[refSplit.length-1]}`;
+    obj.$ref = `#/components/schemas/${refSplit[refSplit.length - 1]}`;
     delete obj.ref;
   }
   Object.keys(obj).forEach((key) => {
-    if (!(obj === obj[key] || !obj.hasOwnProperty(key))) {
-      updateSpecRefs(obj[key]);
-    }
+    apiToSpec((obj as Record<string, unknown>)[key]);
   });
 };
 
-export const getSchemas = (tsconfigPath: string, modelPath: string, restApi: string): { [key: string]: ModelOptions} => {
+export const getSchemas = (
+  tsconfigPath: string,
+  modelPath: string,
+  restApi: string,
+): { [key: string]: ModelOptions } => {
   // get all the interface file paths
-  const filePaths: string[] = readdirSync(modelPath).map((file) =>
-    pathJoin(modelPath, file),
-  );
+  const filePaths: string[] = readdirSync(modelPath).map((file) => pathJoin(modelPath, file));
 
   const interfaces = filePaths
-    .map(filePath => getConfig(tsconfigPath, filePath))
-    .map(config => createGenerator(config).createSchema(config.type))
+    .map((filePath) => getConfig(tsconfigPath, filePath))
+    .map((config) => createGenerator(config).createSchema(config.type))
     .reduce((p, schema): { [key: string]: ModelOptions } => {
-      const processedSchemas: { [key: string]: ModelOptions } = Object.keys(schema.definitions || {}).reduce(( processed, def) => {
-        const schemaDefinition = (schema.definitions || {})[def];
+      const processedSchemas: { [key: string]: ModelOptions } = Object.keys(
+        schema.definitions as { definitions: Record<string, unknown> },
+      ).reduce((processed, def) => {
+        const schemaDefinition = (schema as { definitions: Record<string, JsonSchema> }).definitions[def];
         return {
           ...processed,
           [def]: interfaceTemplate(def, schemaDefinition as JsonSchema),
@@ -78,6 +87,5 @@ export const getSchemas = (tsconfigPath: string, modelPath: string, restApi: str
     }, {} as { [key: string]: ModelOptions });
   updateApiRefs(interfaces, restApi);
 
-  console.log(JSON.stringify(interfaces.Advanced, null, 2));
   return interfaces;
 };

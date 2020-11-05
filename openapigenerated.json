@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "OpenApi",
-    "version": "2020-11-03T18:13:14.179Z"
+    "version": "2020-11-05T04:33:45.699Z"
   },
   "paths": {
     "/{hello}/basic": {
@@ -17,16 +17,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BasicModel"
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
           "200": {
             "description": "200 response",
@@ -60,7 +50,17 @@
           {
             "authorizer": []
           }
-        ]
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BasicModel"
+              }
+            }
+          },
+          "required": true
+        }
       }
     },
     "/{hello}/advanced": {
@@ -75,16 +75,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AdvancedModel"
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
           "200": {
             "description": "200 response",
@@ -118,7 +108,17 @@
           {
             "authorizer": []
           }
-        ]
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdvancedModel"
+              }
+            }
+          },
+          "required": true
+        }
       }
     }
   },
