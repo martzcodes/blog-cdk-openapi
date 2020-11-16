@@ -1,0 +1,571 @@
+Resources:
+  basicLambdaFunctionServiceRole3D0D875F:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/basicLambdaFunction/ServiceRole/Resource
+  basicLambdaFunctionF69553F9:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket:
+          Ref: AssetParametersc6a2b4422d28bfaddb6d03c053b14a0838754fd463322378d2a88fa648814ccdS3BucketB26A79A4
+        S3Key:
+          Fn::Join:
+            - ""
+            - - Fn::Select:
+                  - 0
+                  - Fn::Split:
+                      - "||"
+                      - Ref: AssetParametersc6a2b4422d28bfaddb6d03c053b14a0838754fd463322378d2a88fa648814ccdS3VersionKey832FECDB
+              - Fn::Select:
+                  - 1
+                  - Fn::Split:
+                      - "||"
+                      - Ref: AssetParametersc6a2b4422d28bfaddb6d03c053b14a0838754fd463322378d2a88fa648814ccdS3VersionKey832FECDB
+      Handler: index.handler
+      Role:
+        Fn::GetAtt:
+          - basicLambdaFunctionServiceRole3D0D875F
+          - Arn
+      Runtime: nodejs12.x
+    DependsOn:
+      - basicLambdaFunctionServiceRole3D0D875F
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/basicLambdaFunction/Resource
+      aws:asset:path: /Users/mattmartz/Development/blog/blog-cdk-openapi/dist/basic
+      aws:asset:property: Code
+  advancedLambdaFunctionServiceRole94547389:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/advancedLambdaFunction/ServiceRole/Resource
+  advancedLambdaFunction225720E0:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket:
+          Ref: AssetParametersfe16d160f3e59df7f44d065b0a7752be0d2859c537cfb27ba9bbf990a4af520dS3BucketC9944C97
+        S3Key:
+          Fn::Join:
+            - ""
+            - - Fn::Select:
+                  - 0
+                  - Fn::Split:
+                      - "||"
+                      - Ref: AssetParametersfe16d160f3e59df7f44d065b0a7752be0d2859c537cfb27ba9bbf990a4af520dS3VersionKey7EEBD699
+              - Fn::Select:
+                  - 1
+                  - Fn::Split:
+                      - "||"
+                      - Ref: AssetParametersfe16d160f3e59df7f44d065b0a7752be0d2859c537cfb27ba9bbf990a4af520dS3VersionKey7EEBD699
+      Handler: index.handler
+      Role:
+        Fn::GetAtt:
+          - advancedLambdaFunctionServiceRole94547389
+          - Arn
+      Runtime: nodejs12.x
+    DependsOn:
+      - advancedLambdaFunctionServiceRole94547389
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/advancedLambdaFunction/Resource
+      aws:asset:path: /Users/mattmartz/Development/blog/blog-cdk-openapi/dist/advanced
+      aws:asset:property: Code
+  authorizerLambdaFunctionServiceRole2AEEDAD3:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/authorizerLambdaFunction/ServiceRole/Resource
+  authorizerLambdaFunction52301750:
+    Type: AWS::Lambda::Function
+    Properties:
+      Code:
+        S3Bucket:
+          Ref: AssetParameters5ec39c8f0f8073528dd95426d31a503fd96c100b1a71cb78213a80e83dc6190eS3Bucket6D9E59B4
+        S3Key:
+          Fn::Join:
+            - ""
+            - - Fn::Select:
+                  - 0
+                  - Fn::Split:
+                      - "||"
+                      - Ref: AssetParameters5ec39c8f0f8073528dd95426d31a503fd96c100b1a71cb78213a80e83dc6190eS3VersionKey1BD7F245
+              - Fn::Select:
+                  - 1
+                  - Fn::Split:
+                      - "||"
+                      - Ref: AssetParameters5ec39c8f0f8073528dd95426d31a503fd96c100b1a71cb78213a80e83dc6190eS3VersionKey1BD7F245
+      Handler: index.handler
+      Role:
+        Fn::GetAtt:
+          - authorizerLambdaFunctionServiceRole2AEEDAD3
+          - Arn
+      Runtime: nodejs12.x
+      FunctionName: blogAuthorizer
+    DependsOn:
+      - authorizerLambdaFunctionServiceRole2AEEDAD3
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/authorizerLambdaFunction/Resource
+      aws:asset:path: /Users/mattmartz/Development/blog/blog-cdk-openapi/dist/authorizer
+      aws:asset:property: Code
+  authorizerLambdaFunctionblogcdkopenapiblogAuthorizer0C135D8APermissions16814EEA:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - authorizerLambdaFunction52301750
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:us-east-1:359317520455:"
+            - Ref: OpenApi667EDE0B
+            - /authorizers/
+            - Ref: blogAuthorizerF1D3AEF3
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/authorizerLambdaFunction/blogcdkopenapiblogAuthorizer0C135D8A:Permissions
+  blogAuthorizerF1D3AEF3:
+    Type: AWS::ApiGateway::Authorizer
+    Properties:
+      RestApiId:
+        Ref: OpenApi667EDE0B
+      Type: TOKEN
+      AuthorizerUri:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - :apigateway:us-east-1:lambda:path/2015-03-31/functions/
+            - Fn::GetAtt:
+                - authorizerLambdaFunction52301750
+                - Arn
+            - /invocations
+      IdentitySource: method.request.header.Authorization
+      Name: blogcdkopenapiblogAuthorizer0C135D8A
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/blogAuthorizer/Resource
+  OpenApi667EDE0B:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: OpenApi
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/Resource
+  OpenApiCloudWatchRole86E92353:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action: sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service: apigateway.amazonaws.com
+        Version: "2012-10-17"
+      ManagedPolicyArns:
+        - Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/CloudWatchRole/Resource
+  OpenApiAccount550EBAC4:
+    Type: AWS::ApiGateway::Account
+    Properties:
+      CloudWatchRoleArn:
+        Fn::GetAtt:
+          - OpenApiCloudWatchRole86E92353
+          - Arn
+    DependsOn:
+      - OpenApi667EDE0B
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/Account
+  OpenApiDeployment46B89897c68c762e2ce2894da24f4f9f06bbeb86:
+    Type: AWS::ApiGateway::Deployment
+    Properties:
+      RestApiId:
+        Ref: OpenApi667EDE0B
+      Description: Automatically created by the RestApi construct
+    DependsOn:
+      - OpenApiAdvancedModelF9EAD729
+      - OpenApiBasicModel9C5F67F6
+      - OpenApihelloadvancedPOSTAD3289AF
+      - OpenApihelloadvanced433A9690
+      - OpenApihellobasicPOSTF675B7C6
+      - OpenApihellobasic064FEE77
+      - OpenApihello8A8BE927
+      - OpenApiResponseModel05515321
+      - OpenApivalidatorParamsBodyA1B3230E
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/Deployment/Resource
+  OpenApiDeploymentStageprod3BBCA9DE:
+    Type: AWS::ApiGateway::Stage
+    Properties:
+      RestApiId:
+        Ref: OpenApi667EDE0B
+      DeploymentId:
+        Ref: OpenApiDeployment46B89897c68c762e2ce2894da24f4f9f06bbeb86
+      StageName: prod
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/DeploymentStage.prod/Resource
+  OpenApihello8A8BE927:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId:
+        Fn::GetAtt:
+          - OpenApi667EDE0B
+          - RootResourceId
+      PathPart: "{hello}"
+      RestApiId:
+        Ref: OpenApi667EDE0B
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/Default/{hello}/Resource
+  OpenApihellobasic064FEE77:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId:
+        Ref: OpenApihello8A8BE927
+      PathPart: basic
+      RestApiId:
+        Ref: OpenApi667EDE0B
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/Default/{hello}/basic/Resource
+  OpenApihellobasicPOSTApiPermissionblogcdkopenapiOpenApiC8D92670POSThellobasic16606A18:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - basicLambdaFunctionF69553F9
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:us-east-1:359317520455:"
+            - Ref: OpenApi667EDE0B
+            - /
+            - Ref: OpenApiDeploymentStageprod3BBCA9DE
+            - /POST/*/basic
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/Default/{hello}/basic/POST/ApiPermission.blogcdkopenapiOpenApiC8D92670.POST..{hello}.basic
+  OpenApihellobasicPOSTApiPermissionTestblogcdkopenapiOpenApiC8D92670POSThellobasic45444BFB:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - basicLambdaFunctionF69553F9
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:us-east-1:359317520455:"
+            - Ref: OpenApi667EDE0B
+            - /test-invoke-stage/POST/*/basic
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/Default/{hello}/basic/POST/ApiPermission.Test.blogcdkopenapiOpenApiC8D92670.POST..{hello}.basic
+  OpenApihellobasicPOSTF675B7C6:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: POST
+      ResourceId:
+        Ref: OpenApihellobasic064FEE77
+      RestApiId:
+        Ref: OpenApi667EDE0B
+      AuthorizationType: CUSTOM
+      AuthorizerId:
+        Ref: blogAuthorizerF1D3AEF3
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri:
+          Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :apigateway:us-east-1:lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - basicLambdaFunctionF69553F9
+                  - Arn
+              - /invocations
+      MethodResponses:
+        - ResponseModels:
+            application/json:
+              Ref: OpenApiResponseModel05515321
+          ResponseParameters:
+            method.response.header.Content-Type: true
+            method.response.header.Access-Control-Allow-Origin: true
+            method.response.header.Access-Control-Allow-Credentials: true
+          StatusCode: "200"
+      RequestModels:
+        application/json:
+          Ref: OpenApiBasicModel9C5F67F6
+      RequestParameters:
+        method.request.path.hello: true
+      RequestValidatorId:
+        Ref: OpenApivalidatorParamsBodyA1B3230E
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/Default/{hello}/basic/POST/Resource
+  OpenApihelloadvanced433A9690:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId:
+        Ref: OpenApihello8A8BE927
+      PathPart: advanced
+      RestApiId:
+        Ref: OpenApi667EDE0B
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/Default/{hello}/advanced/Resource
+  OpenApihelloadvancedPOSTApiPermissionblogcdkopenapiOpenApiC8D92670POSThelloadvancedD157B68A:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - advancedLambdaFunction225720E0
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:us-east-1:359317520455:"
+            - Ref: OpenApi667EDE0B
+            - /
+            - Ref: OpenApiDeploymentStageprod3BBCA9DE
+            - /POST/*/advanced
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/Default/{hello}/advanced/POST/ApiPermission.blogcdkopenapiOpenApiC8D92670.POST..{hello}.advanced
+  OpenApihelloadvancedPOSTApiPermissionTestblogcdkopenapiOpenApiC8D92670POSThelloadvancedB2811708:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName:
+        Fn::GetAtt:
+          - advancedLambdaFunction225720E0
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Join:
+          - ""
+          - - "arn:"
+            - Ref: AWS::Partition
+            - ":execute-api:us-east-1:359317520455:"
+            - Ref: OpenApi667EDE0B
+            - /test-invoke-stage/POST/*/advanced
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/Default/{hello}/advanced/POST/ApiPermission.Test.blogcdkopenapiOpenApiC8D92670.POST..{hello}.advanced
+  OpenApihelloadvancedPOSTAD3289AF:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      HttpMethod: POST
+      ResourceId:
+        Ref: OpenApihelloadvanced433A9690
+      RestApiId:
+        Ref: OpenApi667EDE0B
+      AuthorizationType: CUSTOM
+      AuthorizerId:
+        Ref: blogAuthorizerF1D3AEF3
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS_PROXY
+        Uri:
+          Fn::Join:
+            - ""
+            - - "arn:"
+              - Ref: AWS::Partition
+              - :apigateway:us-east-1:lambda:path/2015-03-31/functions/
+              - Fn::GetAtt:
+                  - advancedLambdaFunction225720E0
+                  - Arn
+              - /invocations
+      MethodResponses:
+        - ResponseModels:
+            application/json:
+              Ref: OpenApiResponseModel05515321
+          ResponseParameters:
+            method.response.header.Content-Type: true
+            method.response.header.Access-Control-Allow-Origin: true
+            method.response.header.Access-Control-Allow-Credentials: true
+          StatusCode: "200"
+      RequestModels:
+        application/json:
+          Ref: OpenApiAdvancedModelF9EAD729
+      RequestParameters:
+        method.request.path.hello: true
+      RequestValidatorId:
+        Ref: OpenApivalidatorParamsBodyA1B3230E
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/Default/{hello}/advanced/POST/Resource
+  OpenApivalidatorParamsBodyA1B3230E:
+    Type: AWS::ApiGateway::RequestValidator
+    Properties:
+      RestApiId:
+        Ref: OpenApi667EDE0B
+      ValidateRequestBody: true
+      ValidateRequestParameters: true
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/validatorParamsBody/Resource
+  OpenApiBasicModel9C5F67F6:
+    Type: AWS::ApiGateway::Model
+    Properties:
+      RestApiId:
+        Ref: OpenApi667EDE0B
+      ContentType: application/json
+      Name: BasicModel
+      Schema:
+        type: object
+        properties:
+          someString:
+            type: string
+          someNumber:
+            type: number
+        required:
+          - someString
+          - someNumber
+        $schema: http://json-schema.org/draft-07/schema#
+        title: BasicModel
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/BasicModel/Resource
+  OpenApiResponseModel05515321:
+    Type: AWS::ApiGateway::Model
+    Properties:
+      RestApiId:
+        Ref: OpenApi667EDE0B
+      ContentType: application/json
+      Name: ResponseModel
+      Schema:
+        type: object
+        properties:
+          message:
+            type: string
+        required:
+          - message
+        $schema: http://json-schema.org/draft-07/schema#
+        title: ResponseModel
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/ResponseModel/Resource
+  OpenApiAdvancedModelF9EAD729:
+    Type: AWS::ApiGateway::Model
+    Properties:
+      RestApiId:
+        Ref: OpenApi667EDE0B
+      ContentType: application/json
+      Name: AdvancedModel
+      Schema:
+        type: object
+        properties:
+          greeting:
+            type: string
+          basic:
+            $ref:
+              Fn::Join:
+                - ""
+                - - https://apigateway.amazonaws.com/restapis/
+                  - Ref: OpenApi667EDE0B
+                  - /models/BasicModel
+          postfix:
+            type: string
+        required:
+          - greeting
+          - basic
+        $schema: http://json-schema.org/draft-07/schema#
+        title: AdvancedModel
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/OpenApi/OpenApi/AdvancedModel/Resource
+  CDKMetadata:
+    Type: AWS::CDK::Metadata
+    Properties:
+      Modules: aws-cdk=1.71.0,@aws-cdk/assets=1.71.0,@aws-cdk/aws-apigateway=1.71.0,@aws-cdk/aws-applicationautoscaling=1.71.0,@aws-cdk/aws-autoscaling-common=1.71.0,@aws-cdk/aws-cloudwatch=1.71.0,@aws-cdk/aws-codeguruprofiler=1.71.0,@aws-cdk/aws-ec2=1.71.0,@aws-cdk/aws-events=1.71.0,@aws-cdk/aws-iam=1.71.0,@aws-cdk/aws-kms=1.71.0,@aws-cdk/aws-lambda=1.71.0,@aws-cdk/aws-logs=1.71.0,@aws-cdk/aws-s3=1.71.0,@aws-cdk/aws-s3-assets=1.71.0,@aws-cdk/aws-sqs=1.71.0,@aws-cdk/aws-ssm=1.71.0,@aws-cdk/cloud-assembly-schema=1.71.0,@aws-cdk/core=1.71.0,@aws-cdk/cx-api=1.71.0,@aws-cdk/region-info=1.71.0,jsii-runtime=node.js/v12.13.1
+    Metadata:
+      aws:cdk:path: blog-cdk-openapi/CDKMetadata/Default
+Parameters:
+  AssetParametersc6a2b4422d28bfaddb6d03c053b14a0838754fd463322378d2a88fa648814ccdS3BucketB26A79A4:
+    Type: String
+    Description: S3 bucket for asset "c6a2b4422d28bfaddb6d03c053b14a0838754fd463322378d2a88fa648814ccd"
+  AssetParametersc6a2b4422d28bfaddb6d03c053b14a0838754fd463322378d2a88fa648814ccdS3VersionKey832FECDB:
+    Type: String
+    Description: S3 key for asset version "c6a2b4422d28bfaddb6d03c053b14a0838754fd463322378d2a88fa648814ccd"
+  AssetParametersc6a2b4422d28bfaddb6d03c053b14a0838754fd463322378d2a88fa648814ccdArtifactHashF905BC7F:
+    Type: String
+    Description: Artifact hash for asset "c6a2b4422d28bfaddb6d03c053b14a0838754fd463322378d2a88fa648814ccd"
+  AssetParametersfe16d160f3e59df7f44d065b0a7752be0d2859c537cfb27ba9bbf990a4af520dS3BucketC9944C97:
+    Type: String
+    Description: S3 bucket for asset "fe16d160f3e59df7f44d065b0a7752be0d2859c537cfb27ba9bbf990a4af520d"
+  AssetParametersfe16d160f3e59df7f44d065b0a7752be0d2859c537cfb27ba9bbf990a4af520dS3VersionKey7EEBD699:
+    Type: String
+    Description: S3 key for asset version "fe16d160f3e59df7f44d065b0a7752be0d2859c537cfb27ba9bbf990a4af520d"
+  AssetParametersfe16d160f3e59df7f44d065b0a7752be0d2859c537cfb27ba9bbf990a4af520dArtifactHashAEA3A938:
+    Type: String
+    Description: Artifact hash for asset "fe16d160f3e59df7f44d065b0a7752be0d2859c537cfb27ba9bbf990a4af520d"
+  AssetParameters5ec39c8f0f8073528dd95426d31a503fd96c100b1a71cb78213a80e83dc6190eS3Bucket6D9E59B4:
+    Type: String
+    Description: S3 bucket for asset "5ec39c8f0f8073528dd95426d31a503fd96c100b1a71cb78213a80e83dc6190e"
+  AssetParameters5ec39c8f0f8073528dd95426d31a503fd96c100b1a71cb78213a80e83dc6190eS3VersionKey1BD7F245:
+    Type: String
+    Description: S3 key for asset version "5ec39c8f0f8073528dd95426d31a503fd96c100b1a71cb78213a80e83dc6190e"
+  AssetParameters5ec39c8f0f8073528dd95426d31a503fd96c100b1a71cb78213a80e83dc6190eArtifactHash733863D5:
+    Type: String
+    Description: Artifact hash for asset "5ec39c8f0f8073528dd95426d31a503fd96c100b1a71cb78213a80e83dc6190e"
+Outputs:
+  OpenApiEndpointAD04A46A:
+    Value:
+      Fn::Join:
+        - ""
+        - - https://
+          - Ref: OpenApi667EDE0B
+          - .execute-api.us-east-1.
+          - Ref: AWS::URLSuffix
+          - /
+          - Ref: OpenApiDeploymentStageprod3BBCA9DE
+          - /
+

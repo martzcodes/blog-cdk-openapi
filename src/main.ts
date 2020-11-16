@@ -1,7 +1,6 @@
 import { join } from 'path';
 import { TokenAuthorizer } from '@aws-cdk/aws-apigateway';
-import { Runtime } from '@aws-cdk/aws-lambda';
-import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
+import { AssetCode, Function, Runtime } from '@aws-cdk/aws-lambda';
 import { App, Construct, Stack, StackProps } from '@aws-cdk/core';
 import { OpenApiConstruct, OpenApiSpec } from './api';
 
@@ -14,23 +13,25 @@ export class MyStack extends Stack {
   constructor(scope: Construct, id: string, props: MyStackProps = { generateApiSpec: false }) {
     super(scope, id, props);
 
-    const basicLambda = new NodejsFunction(this, 'basicLambdaFunction', {
-      entry: `${__dirname}/lambdas/basic.ts`,
-      handler: 'handler',
+    const lambdaProps = {
+      handler: 'index.handler',
       runtime: Runtime.NODEJS_12_X,
+    };
+
+    const basicLambda = new Function(this, 'basicLambdaFunction', {
+      ...lambdaProps,
+      code: new AssetCode(`${__dirname}/../dist/basic`),
     });
 
-    const advancedLambda = new NodejsFunction(this, 'advancedLambdaFunction', {
-      entry: `${__dirname}/lambdas/advanced.ts`,
-      handler: 'handler',
-      runtime: Runtime.NODEJS_12_X,
+    const advancedLambda = new Function(this, 'advancedLambdaFunction', {
+      ...lambdaProps,
+      code: new AssetCode(`${__dirname}/../dist/advanced`),
     });
 
-    const authorizerLambda = new NodejsFunction(this, 'authorizerLambdaFunction', {
+    const authorizerLambda = new Function(this, 'authorizerLambdaFunction', {
       functionName: 'blogAuthorizer',
-      entry: `${__dirname}/lambdas/authorizer.ts`,
-      handler: 'handler',
-      runtime: Runtime.NODEJS_12_X,
+      ...lambdaProps,
+      code: new AssetCode(`${__dirname}/../dist/authorizer`),
     });
 
     const auth = new TokenAuthorizer(this, 'blogAuthorizer', {

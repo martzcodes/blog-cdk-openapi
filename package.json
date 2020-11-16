@@ -19,7 +19,12 @@
     "synth": "cdk synth",
     "deploy": "cdk deploy",
     "diff": "cdk diff",
-    "destroy": "cdk destroy"
+    "destroy": "cdk destroy",
+    "clean": "rimraf dist",
+    "lambda": "yarn run clean && ts-node ./src/esbuild.ts",
+    "prebuild": "yarn run lambda",
+    "predeploy": "yarn run lambda",
+    "visualize": "cdk synth --no-staging > template.yaml && cat template.yaml | cfg"
   },
   "author": {
     "name": "Matt Martz",
@@ -33,6 +38,8 @@
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
     "aws-cdk": "^1.71.0",
+    "cloudformation-graph": "1.2.0",
+    "esbuild": "^0.7.19",
     "eslint": "^7.12.1",
     "eslint-import-resolver-node": "^0.3.4",
     "eslint-import-resolver-typescript": "^2.3.0",
@@ -40,6 +47,7 @@
     "jest": "^26.4.2",
     "json-schema": "^0.2.5",
     "projen": "^0.3.138",
+    "rimraf": "^3.0.2",
     "standard-version": "^9.0.0",
     "ts-jest": "^26.1.0",
     "ts-node": "^9.0.0",
@@ -50,7 +58,6 @@
     "@aws-cdk/assert": "^1.71.0",
     "@aws-cdk/aws-apigateway": "^1.71.0",
     "@aws-cdk/aws-lambda": "^1.71.0",
-    "@aws-cdk/aws-lambda-nodejs": "^1.71.0",
     "@aws-cdk/core": "^1.71.0",
     "ts-json-schema-generator": "0.77.0"
   },
@@ -146,19 +153,6 @@
     "globals": {
       "ts-jest": {
         "tsconfig": "tsconfig.jest.json"
-      }
-    }
-  },
-  "targets": {
-    "cdk-lambda": {
-      "context": "node",
-      "includeNodeModules": {
-        "aws-sdk": false
-      },
-      "sourceMap": false,
-      "minify": false,
-      "engines": {
-        "node": ">= 12"
       }
     }
   }

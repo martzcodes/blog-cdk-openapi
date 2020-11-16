@@ -15,3 +15,7 @@ https://editor.swagger.io/?url=https://raw.githubusercontent.com/martzcodes/blog
 
 Generated from project:
 https://editor.swagger.io/?url=https://raw.githubusercontent.com/martzcodes/blog-cdk-openapi/main/openapigenerated.json
+
+## Second blog... auto-cloudformation visualization:
+
+![CFN Output](./cloudformation.png)
