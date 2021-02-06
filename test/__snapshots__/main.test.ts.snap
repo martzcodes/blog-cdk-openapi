@@ -67,7 +67,7 @@ Object {
   },
   "openapi": "3.0.1",
   "paths": Object {
-    "/{hello}/advanced": Object {
+    "/example/{hello}/advanced": Object {
       "post": Object {
         "parameters": Array [
           Object {
@@ -125,7 +125,7 @@ Object {
         ],
       },
     },
-    "/{hello}/basic": Object {
+    "/example/{hello}/basic": Object {
       "post": Object {
         "parameters": Array [
           Object {
@@ -218,40 +218,40 @@ Object {
     },
   },
   "Parameters": Object {
-    "AssetParameters4229e3ca613f457841c56f01ac9c10a33a209ecd00ed87c06aa628b1d1063b76ArtifactHashF467ECE7": Object {
-      "Description": "Artifact hash for asset \\"4229e3ca613f457841c56f01ac9c10a33a209ecd00ed87c06aa628b1d1063b76\\"",
+    "AssetParameters1db54d8da187102a9fa51c5312d208baed3a64e997d0f490f8a326d3d5a24ce8ArtifactHash655C497B": Object {
+      "Description": "Artifact hash for asset \\"1db54d8da187102a9fa51c5312d208baed3a64e997d0f490f8a326d3d5a24ce8\\"",
       "Type": "String",
     },
-    "AssetParameters4229e3ca613f457841c56f01ac9c10a33a209ecd00ed87c06aa628b1d1063b76S3Bucket38E835CA": Object {
-      "Description": "S3 bucket for asset \\"4229e3ca613f457841c56f01ac9c10a33a209ecd00ed87c06aa628b1d1063b76\\"",
+    "AssetParameters1db54d8da187102a9fa51c5312d208baed3a64e997d0f490f8a326d3d5a24ce8S3BucketD94FFC1A": Object {
+      "Description": "S3 bucket for asset \\"1db54d8da187102a9fa51c5312d208baed3a64e997d0f490f8a326d3d5a24ce8\\"",
       "Type": "String",
     },
-    "AssetParameters4229e3ca613f457841c56f01ac9c10a33a209ecd00ed87c06aa628b1d1063b76S3VersionKey2EDD6DB1": Object {
-      "Description": "S3 key for asset version \\"4229e3ca613f457841c56f01ac9c10a33a209ecd00ed87c06aa628b1d1063b76\\"",
+    "AssetParameters1db54d8da187102a9fa51c5312d208baed3a64e997d0f490f8a326d3d5a24ce8S3VersionKeyC9298FB3": Object {
+      "Description": "S3 key for asset version \\"1db54d8da187102a9fa51c5312d208baed3a64e997d0f490f8a326d3d5a24ce8\\"",
       "Type": "String",
     },
-    "AssetParameters85328f19b68253a2c5a78f85945770d92a8e35594f71eb10e9b33acafa868726ArtifactHash9888BC96": Object {
-      "Description": "Artifact hash for asset \\"85328f19b68253a2c5a78f85945770d92a8e35594f71eb10e9b33acafa868726\\"",
+    "AssetParameters86513f9e978934f5bd127a1191c99f97ae26cc5d7c9cbb7ff5130d9d3559f58aArtifactHashCAA04F06": Object {
+      "Description": "Artifact hash for asset \\"86513f9e978934f5bd127a1191c99f97ae26cc5d7c9cbb7ff5130d9d3559f58a\\"",
       "Type": "String",
     },
-    "AssetParameters85328f19b68253a2c5a78f85945770d92a8e35594f71eb10e9b33acafa868726S3Bucket18A54A74": Object {
-      "Description": "S3 bucket for asset \\"85328f19b68253a2c5a78f85945770d92a8e35594f71eb10e9b33acafa868726\\"",
+    "AssetParameters86513f9e978934f5bd127a1191c99f97ae26cc5d7c9cbb7ff5130d9d3559f58aS3Bucket642C6685": Object {
+      "Description": "S3 bucket for asset \\"86513f9e978934f5bd127a1191c99f97ae26cc5d7c9cbb7ff5130d9d3559f58a\\"",
       "Type": "String",
     },
-    "AssetParameters85328f19b68253a2c5a78f85945770d92a8e35594f71eb10e9b33acafa868726S3VersionKeyFEE45B1A": Object {
-      "Description": "S3 key for asset version \\"85328f19b68253a2c5a78f85945770d92a8e35594f71eb10e9b33acafa868726\\"",
+    "AssetParameters86513f9e978934f5bd127a1191c99f97ae26cc5d7c9cbb7ff5130d9d3559f58aS3VersionKey5E7A28F6": Object {
+      "Description": "S3 key for asset version \\"86513f9e978934f5bd127a1191c99f97ae26cc5d7c9cbb7ff5130d9d3559f58a\\"",
       "Type": "String",
     },
-    "AssetParametersed882f74d49503232e12bf9cada04c32c5c07a9222b6d2b06c5f23a481e84ab6ArtifactHash70C86D71": Object {
-      "Description": "Artifact hash for asset \\"ed882f74d49503232e12bf9cada04c32c5c07a9222b6d2b06c5f23a481e84ab6\\"",
+    "AssetParameters9d01930cfb66bbbf023061a9f8291a6b4805e9c4fb872733072be52324635305ArtifactHashBD1E13F5": Object {
+      "Description": "Artifact hash for asset \\"9d01930cfb66bbbf023061a9f8291a6b4805e9c4fb872733072be52324635305\\"",
       "Type": "String",
     },
-    "AssetParametersed882f74d49503232e12bf9cada04c32c5c07a9222b6d2b06c5f23a481e84ab6S3Bucket65B490D4": Object {
-      "Description": "S3 bucket for asset \\"ed882f74d49503232e12bf9cada04c32c5c07a9222b6d2b06c5f23a481e84ab6\\"",
+    "AssetParameters9d01930cfb66bbbf023061a9f8291a6b4805e9c4fb872733072be52324635305S3BucketB9C472F0": Object {
+      "Description": "S3 bucket for asset \\"9d01930cfb66bbbf023061a9f8291a6b4805e9c4fb872733072be52324635305\\"",
       "Type": "String",
     },
-    "AssetParametersed882f74d49503232e12bf9cada04c32c5c07a9222b6d2b06c5f23a481e84ab6S3VersionKeyBA2A8C50": Object {
-      "Description": "S3 key for asset version \\"ed882f74d49503232e12bf9cada04c32c5c07a9222b6d2b06c5f23a481e84ab6\\"",
+    "AssetParameters9d01930cfb66bbbf023061a9f8291a6b4805e9c4fb872733072be52324635305S3VersionKey193D8D1A": Object {
+      "Description": "S3 key for asset version \\"9d01930cfb66bbbf023061a9f8291a6b4805e9c4fb872733072be52324635305\\"",
       "Type": "String",
     },
   },
@@ -375,15 +375,16 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "OpenApiDeployment46B89897cd429c3d0e7303d2e7df1bff5fa6213e": Object {
+    "OpenApiDeployment46B89897fc8a199b7611daa2338e4a2ed0dc48b0": Object {
       "DependsOn": Array [
         "OpenApiAdvancedModelF9EAD729",
         "OpenApiBasicModel9C5F67F6",
-        "OpenApihelloadvancedPOSTAD3289AF",
-        "OpenApihelloadvanced433A9690",
-        "OpenApihellobasicPOSTF675B7C6",
-        "OpenApihellobasic064FEE77",
-        "OpenApihello8A8BE927",
+        "OpenApiexamplehelloadvancedPOSTA5F66F5E",
+        "OpenApiexamplehelloadvanced33A8B49E",
+        "OpenApiexamplehellobasicPOSTC5CB8664",
+        "OpenApiexamplehellobasicD068E15C",
+        "OpenApiexamplehello419DFBD2",
+        "OpenApiexampleA15E7BB2",
         "OpenApiResponseModel05515321",
         "OpenApivalidatorParamsBodyA1B3230E",
       ],
@@ -398,7 +399,7 @@ Object {
     "OpenApiDeploymentStageprod3BBCA9DE": Object {
       "Properties": Object {
         "DeploymentId": Object {
-          "Ref": "OpenApiDeployment46B89897cd429c3d0e7303d2e7df1bff5fa6213e",
+          "Ref": "OpenApiDeployment46B89897fc8a199b7611daa2338e4a2ed0dc48b0",
         },
         "RestApiId": Object {
           "Ref": "OpenApi667EDE0B",
@@ -430,13 +431,25 @@ Object {
       },
       "Type": "AWS::ApiGateway::Model",
     },
-    "OpenApihello8A8BE927": Object {
+    "OpenApiexampleA15E7BB2": Object {
       "Properties": Object {
         "ParentId": Object {
           "Fn::GetAtt": Array [
             "OpenApi667EDE0B",
             "RootResourceId",
           ],
+        },
+        "PathPart": "example",
+        "RestApiId": Object {
+          "Ref": "OpenApi667EDE0B",
+        },
+      },
+      "Type": "AWS::ApiGateway::Resource",
+    },
+    "OpenApiexamplehello419DFBD2": Object {
+      "Properties": Object {
+        "ParentId": Object {
+          "Ref": "OpenApiexampleA15E7BB2",
         },
         "PathPart": "{hello}",
         "RestApiId": Object {
@@ -445,10 +458,10 @@ Object {
       },
       "Type": "AWS::ApiGateway::Resource",
     },
-    "OpenApihelloadvanced433A9690": Object {
+    "OpenApiexamplehelloadvanced33A8B49E": Object {
       "Properties": Object {
         "ParentId": Object {
-          "Ref": "OpenApihello8A8BE927",
+          "Ref": "OpenApiexamplehello419DFBD2",
         },
         "PathPart": "advanced",
         "RestApiId": Object {
@@ -457,7 +470,7 @@ Object {
       },
       "Type": "AWS::ApiGateway::Resource",
     },
-    "OpenApihelloadvancedPOSTAD3289AF": Object {
+    "OpenApiexamplehelloadvancedPOSTA5F66F5E": Object {
       "Properties": Object {
         "AuthorizationType": "CUSTOM",
         "AuthorizerId": Object {
@@ -518,7 +531,7 @@ Object {
           "Ref": "OpenApivalidatorParamsBodyA1B3230E",
         },
         "ResourceId": Object {
-          "Ref": "OpenApihelloadvanced433A9690",
+          "Ref": "OpenApiexamplehelloadvanced33A8B49E",
         },
         "RestApiId": Object {
           "Ref": "OpenApi667EDE0B",
@@ -526,7 +539,7 @@ Object {
       },
       "Type": "AWS::ApiGateway::Method",
     },
-    "OpenApihelloadvancedPOSTApiPermissionTesttestOpenApi1D4E6227POSThelloadvancedD4D12389": Object {
+    "OpenApiexamplehelloadvancedPOSTApiPermissionTesttestOpenApi1D4E6227POSTexamplehelloadvancedA7B5C5E8": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -556,14 +569,14 @@ Object {
               Object {
                 "Ref": "OpenApi667EDE0B",
               },
-              "/test-invoke-stage/POST/*/advanced",
+              "/test-invoke-stage/POST/example/*/advanced",
             ],
           ],
         },
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "OpenApihelloadvancedPOSTApiPermissiontestOpenApi1D4E6227POSThelloadvanced22497703": Object {
+    "OpenApiexamplehelloadvancedPOSTApiPermissiontestOpenApi1D4E6227POSTexamplehelloadvanced3FE3E384": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -597,17 +610,17 @@ Object {
               Object {
                 "Ref": "OpenApiDeploymentStageprod3BBCA9DE",
               },
-              "/POST/*/advanced",
+              "/POST/example/*/advanced",
             ],
           ],
         },
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "OpenApihellobasic064FEE77": Object {
+    "OpenApiexamplehellobasicD068E15C": Object {
       "Properties": Object {
         "ParentId": Object {
-          "Ref": "OpenApihello8A8BE927",
+          "Ref": "OpenApiexamplehello419DFBD2",
         },
         "PathPart": "basic",
         "RestApiId": Object {
@@ -616,7 +629,7 @@ Object {
       },
       "Type": "AWS::ApiGateway::Resource",
     },
-    "OpenApihellobasicPOSTApiPermissionTesttestOpenApi1D4E6227POSThellobasicC19B13AB": Object {
+    "OpenApiexamplehellobasicPOSTApiPermissionTesttestOpenApi1D4E6227POSTexamplehellobasic44E1E239": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -646,14 +659,14 @@ Object {
               Object {
                 "Ref": "OpenApi667EDE0B",
               },
-              "/test-invoke-stage/POST/*/basic",
+              "/test-invoke-stage/POST/example/*/basic",
             ],
           ],
         },
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "OpenApihellobasicPOSTApiPermissiontestOpenApi1D4E6227POSThellobasic38FB83EC": Object {
+    "OpenApiexamplehellobasicPOSTApiPermissiontestOpenApi1D4E6227POSTexamplehellobasic3A16EBDE": Object {
       "Properties": Object {
         "Action": "lambda:InvokeFunction",
         "FunctionName": Object {
@@ -687,14 +700,14 @@ Object {
               Object {
                 "Ref": "OpenApiDeploymentStageprod3BBCA9DE",
               },
-              "/POST/*/basic",
+              "/POST/example/*/basic",
             ],
           ],
         },
       },
       "Type": "AWS::Lambda::Permission",
     },
-    "OpenApihellobasicPOSTF675B7C6": Object {
+    "OpenApiexamplehellobasicPOSTC5CB8664": Object {
       "Properties": Object {
         "AuthorizationType": "CUSTOM",
         "AuthorizerId": Object {
@@ -755,7 +768,7 @@ Object {
           "Ref": "OpenApivalidatorParamsBodyA1B3230E",
         },
         "ResourceId": Object {
-          "Ref": "OpenApihellobasic064FEE77",
+          "Ref": "OpenApiexamplehellobasicD068E15C",
         },
         "RestApiId": Object {
           "Ref": "OpenApi667EDE0B",
@@ -780,7 +793,7 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParametersed882f74d49503232e12bf9cada04c32c5c07a9222b6d2b06c5f23a481e84ab6S3Bucket65B490D4",
+            "Ref": "AssetParameters86513f9e978934f5bd127a1191c99f97ae26cc5d7c9cbb7ff5130d9d3559f58aS3Bucket642C6685",
           },
           "S3Key": Object {
             "Fn::Join": Array [
@@ -793,7 +806,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParametersed882f74d49503232e12bf9cada04c32c5c07a9222b6d2b06c5f23a481e84ab6S3VersionKeyBA2A8C50",
+                          "Ref": "AssetParameters86513f9e978934f5bd127a1191c99f97ae26cc5d7c9cbb7ff5130d9d3559f58aS3VersionKey5E7A28F6",
                         },
                       ],
                     },
@@ -806,7 +819,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParametersed882f74d49503232e12bf9cada04c32c5c07a9222b6d2b06c5f23a481e84ab6S3VersionKeyBA2A8C50",
+                          "Ref": "AssetParameters86513f9e978934f5bd127a1191c99f97ae26cc5d7c9cbb7ff5130d9d3559f58aS3VersionKey5E7A28F6",
                         },
                       ],
                     },
@@ -870,7 +883,7 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters85328f19b68253a2c5a78f85945770d92a8e35594f71eb10e9b33acafa868726S3Bucket18A54A74",
+            "Ref": "AssetParameters9d01930cfb66bbbf023061a9f8291a6b4805e9c4fb872733072be52324635305S3BucketB9C472F0",
           },
           "S3Key": Object {
             "Fn::Join": Array [
@@ -883,7 +896,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters85328f19b68253a2c5a78f85945770d92a8e35594f71eb10e9b33acafa868726S3VersionKeyFEE45B1A",
+                          "Ref": "AssetParameters9d01930cfb66bbbf023061a9f8291a6b4805e9c4fb872733072be52324635305S3VersionKey193D8D1A",
                         },
                       ],
                     },
@@ -896,7 +909,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters85328f19b68253a2c5a78f85945770d92a8e35594f71eb10e9b33acafa868726S3VersionKeyFEE45B1A",
+                          "Ref": "AssetParameters9d01930cfb66bbbf023061a9f8291a6b4805e9c4fb872733072be52324635305S3VersionKey193D8D1A",
                         },
                       ],
                     },
@@ -1001,7 +1014,7 @@ Object {
       "Properties": Object {
         "Code": Object {
           "S3Bucket": Object {
-            "Ref": "AssetParameters4229e3ca613f457841c56f01ac9c10a33a209ecd00ed87c06aa628b1d1063b76S3Bucket38E835CA",
+            "Ref": "AssetParameters1db54d8da187102a9fa51c5312d208baed3a64e997d0f490f8a326d3d5a24ce8S3BucketD94FFC1A",
           },
           "S3Key": Object {
             "Fn::Join": Array [
@@ -1014,7 +1027,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters4229e3ca613f457841c56f01ac9c10a33a209ecd00ed87c06aa628b1d1063b76S3VersionKey2EDD6DB1",
+                          "Ref": "AssetParameters1db54d8da187102a9fa51c5312d208baed3a64e997d0f490f8a326d3d5a24ce8S3VersionKeyC9298FB3",
                         },
                       ],
                     },
@@ -1027,7 +1040,7 @@ Object {
                       "Fn::Split": Array [
                         "||",
                         Object {
-                          "Ref": "AssetParameters4229e3ca613f457841c56f01ac9c10a33a209ecd00ed87c06aa628b1d1063b76S3VersionKey2EDD6DB1",
+                          "Ref": "AssetParameters1db54d8da187102a9fa51c5312d208baed3a64e997d0f490f8a326d3d5a24ce8S3VersionKeyC9298FB3",
                         },
                       ],
                     },
@@ -1086,6 +1099,7 @@ Object {
     },
     "blogAuthorizerF1D3AEF3": Object {
       "Properties": Object {
+        "AuthorizerResultTtlInSeconds": 0,
         "AuthorizerUri": Object {
           "Fn::Join": Array [
             "",
