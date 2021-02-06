@@ -59,7 +59,7 @@ const testGroups: Record<string, ApiTestConfig[]> = {
   ],
   MissingParameters: [
     {
-      name: 'Basic Hello Check',
+      name: 'Basic Missing Params',
       path: '/example/:hello/basic',
       method: 'POST',
       pathParams: {
@@ -72,7 +72,7 @@ const testGroups: Record<string, ApiTestConfig[]> = {
       },
     },
     {
-      name: 'Advanced Hello Check',
+      name: 'Advanced Missing Params',
       path: '/example/:hello/advanced',
       method: 'POST',
       pathParams: {
@@ -91,7 +91,7 @@ const testGroups: Record<string, ApiTestConfig[]> = {
   ],
   InvalidBody: [
     {
-      name: 'Basic Hello Check',
+      name: 'Basic Bad Body',
       path: '/example/:hello/basic',
       method: 'POST',
       pathParams: {
@@ -101,7 +101,7 @@ const testGroups: Record<string, ApiTestConfig[]> = {
       body: {},
     },
     {
-      name: 'Advanced Hello Check',
+      name: 'Advanced Bad Body',
       path: '/example/:hello/advanced',
       method: 'POST',
       pathParams: {
@@ -159,6 +159,7 @@ const generateTestItem = (collection: Collection, testConfig: ApiTestConfig) => 
   const itemJson = item.toJSON();
   delete itemJson.request?.auth;
   delete itemJson.response;
+  delete itemJson.id;
   const testItem = new Item(itemJson);
   testItem.name = testConfig.name;
   Object.keys(testConfig.pathParams).forEach((pathParam) => {
@@ -176,6 +177,7 @@ const generateTestItem = (collection: Collection, testConfig: ApiTestConfig) => 
 const testApi = async (apiTestUrl: string) => {
   const generated = new Collection(apiJson);
   const customized = new Collection({
+    name: 'blog-cdk-openapi-postman',
     auth: {
       type: 'bearer',
       bearer: [
