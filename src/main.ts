@@ -2,7 +2,7 @@ import { join } from 'path';
 import { TokenAuthorizer } from '@aws-cdk/aws-apigateway';
 import { Runtime } from '@aws-cdk/aws-lambda';
 import { NodejsFunction } from '@aws-cdk/aws-lambda-nodejs';
-import { App, Construct, Stack, StackProps } from '@aws-cdk/core';
+import { App, Construct, Duration, Stack, StackProps } from '@aws-cdk/core';
 import { OpenApiConstruct, OpenApiSpec } from './api';
 
 interface MyStackProps extends StackProps {
@@ -35,6 +35,7 @@ export class MyStack extends Stack {
 
     const auth = new TokenAuthorizer(this, 'blogAuthorizer', {
       handler: authorizerLambda,
+      resultsCacheTtl: Duration.millis(0),
     });
 
     const methodResponses = [
@@ -64,7 +65,7 @@ export class MyStack extends Stack {
       models: `${__dirname}/interfaces`,
     });
 
-    api.addEndpoint('/{hello}/basic', 'POST', {
+    api.addEndpoint('/example/{hello}/basic', 'POST', {
       lambda: basicLambda,
       requiredParameters: ['hello'],
       requestModels: {
@@ -73,7 +74,7 @@ export class MyStack extends Stack {
       methodResponses,
     });
 
-    api.addEndpoint('/{hello}/advanced', 'POST', {
+    api.addEndpoint('/example/{hello}/advanced', 'POST', {
       lambda: advancedLambda,
       requiredParameters: ['hello'],
       requestModels: {

@@ -28,5 +28,5 @@ export const handler = async (event: APIGatewayTokenAuthorizerEvent): Promise<AP
 
   const token = event.authorizationToken.replace('Bearer ', '');
 
-  return generatePolicy(token, event.methodArn);
+  return generatePolicy(token, '*');
 };

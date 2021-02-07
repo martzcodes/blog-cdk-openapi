@@ -35,6 +35,8 @@ jspm_packages/
 .yarn-integrity
 # parcel-bundler cache (https://parceljs.org/)
 .cache
+src/newman/newman-*
+src/newman/customized.json
 /lib
 /dist
 /coverage

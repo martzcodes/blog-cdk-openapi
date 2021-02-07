@@ -1,0 +1,261 @@
+{
+    "item": [
+        {
+            "id": "2b4639fd-4f1b-4c3e-a0a6-fb3d92549f03",
+            "name": "{{baseUrl}}/example/:hello/basic",
+            "request": {
+                "name": "{{baseUrl}}/example/:hello/basic",
+                "description": {},
+                "url": {
+                    "path": [
+                        "example",
+                        ":hello",
+                        "basic"
+                    ],
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": [
+                        {
+                            "disabled": false,
+                            "description": "(Required) ",
+                            "type": "any",
+                            "value": "<string>",
+                            "key": "hello"
+                        }
+                    ]
+                },
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "method": "POST",
+                "auth": {
+                    "type": "apikey",
+                    "apikey": [
+                        {
+                            "key": "key",
+                            "value": "Authorization"
+                        },
+                        {
+                            "key": "value",
+                            "value": true
+                        },
+                        {
+                            "key": "in",
+                            "value": "header"
+                        }
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"someString\": \"<string>\",\n    \"someNumber\": \"<number>\"\n}"
+                }
+            },
+            "response": [
+                {
+                    "id": "c62ed818-a2f5-454c-a2cb-7b34706d3fcc",
+                    "name": "200 response",
+                    "originalRequest": {
+                        "url": {
+                            "path": [
+                                "example",
+                                ":hello",
+                                "basic"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": [
+                                {
+                                    "type": "any",
+                                    "key": "hello"
+                                }
+                            ]
+                        },
+                        "header": [
+                            {
+                                "description": {
+                                    "content": "Added as a part of security scheme: apikey",
+                                    "type": "text/plain"
+                                },
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                            }
+                        ],
+                        "method": "POST",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"someString\": \"<string>\",\n    \"someNumber\": \"<number>\"\n}"
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "header": [
+                        {
+                            "disabled": false,
+                            "description": "",
+                            "key": "Access-Control-Allow-Origin",
+                            "value": "ut laboris"
+                        },
+                        {
+                            "disabled": false,
+                            "description": "",
+                            "key": "Access-Control-Allow-Credentials",
+                            "value": "ut laboris"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "body": "{\n \"message\": \"nostrud cillum\"\n}",
+                    "cookie": [],
+                    "_postman_previewlanguage": "json"
+                }
+            ],
+            "event": []
+        },
+        {
+            "id": "278ab739-6503-410e-b76f-fa5bbce64047",
+            "name": "{{baseUrl}}/example/:hello/advanced",
+            "request": {
+                "name": "{{baseUrl}}/example/:hello/advanced",
+                "description": {},
+                "url": {
+                    "path": [
+                        "example",
+                        ":hello",
+                        "advanced"
+                    ],
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "query": [],
+                    "variable": [
+                        {
+                            "disabled": false,
+                            "description": "(Required) ",
+                            "type": "any",
+                            "value": "<string>",
+                            "key": "hello"
+                        }
+                    ]
+                },
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "method": "POST",
+                "auth": {
+                    "type": "apikey",
+                    "apikey": [
+                        {
+                            "key": "key",
+                            "value": "Authorization"
+                        },
+                        {
+                            "key": "value",
+                            "value": true
+                        },
+                        {
+                            "key": "in",
+                            "value": "header"
+                        }
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"greeting\": \"<string>\",\n    \"basic\": {\n        \"someString\": \"<string>\",\n        \"someNumber\": \"<number>\"\n    },\n    \"postfix\": \"<string>\"\n}"
+                }
+            },
+            "response": [
+                {
+                    "id": "564b7918-d3f1-4e8f-a799-0d8c9ac4e13b",
+                    "name": "200 response",
+                    "originalRequest": {
+                        "url": {
+                            "path": [
+                                "example",
+                                ":hello",
+                                "advanced"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [],
+                            "variable": [
+                                {
+                                    "type": "any",
+                                    "key": "hello"
+                                }
+                            ]
+                        },
+                        "header": [
+                            {
+                                "description": {
+                                    "content": "Added as a part of security scheme: apikey",
+                                    "type": "text/plain"
+                                },
+                                "key": "Authorization",
+                                "value": "<API Key>"
+                            }
+                        ],
+                        "method": "POST",
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"greeting\": \"<string>\",\n    \"basic\": {\n        \"someString\": \"<string>\",\n        \"someNumber\": \"<number>\"\n    },\n    \"postfix\": \"<string>\"\n}"
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "header": [
+                        {
+                            "disabled": false,
+                            "description": "",
+                            "key": "Access-Control-Allow-Origin",
+                            "value": "ut laboris"
+                        },
+                        {
+                            "disabled": false,
+                            "description": "",
+                            "key": "Access-Control-Allow-Credentials",
+                            "value": "ut laboris"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                        }
+                    ],
+                    "body": "{\n \"message\": \"nostrud cillum\"\n}",
+                    "cookie": [],
+                    "_postman_previewlanguage": "json"
+                }
+            ],
+            "event": []
+        }
+    ],
+    "event": [],
+    "variable": [
+        {
+            "id": "baseUrl",
+            "type": "string",
+            "value": "/"
+        }
+    ],
+    "info": {
+        "_postman_id": "44f4843a-a214-4628-bd6e-1378e2026e12",
+        "name": "OpenApi",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": {
+            "content": "",
+            "type": "text/plain"
+        }
+    }
+}
